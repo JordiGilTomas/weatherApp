@@ -2,11 +2,22 @@
     <h1>El tiempo en Castellón de la Plana</h1>
 </header>
 
-<select name="continente" id="continente">
+<select name="continentes" id="continentes">
     {{#each continentes}}
-        <option value="{{url}}">{{name._}}</option>
+        <option value="{{name.id}}">{{name._}}</option>
     {{/each}}
 </select>
+<select name="paises" id="paises">
+
+</select>
+<select name="provincias" id="provincias">
+
+</select>
+<select name="localidades" id="localidades">
+
+</select>
+
+
 
 <section class="today">
     <div class="today-weather">
@@ -35,3 +46,6 @@
         </div>
     </div>
 </section>
+
+
+<script src="js/index.js"></script>

@@ -18,6 +18,7 @@ module.exports = {
   rules: {
     "import/extensions": "off",
     "no-console": "off",
-    "indent": "off"
+    "indent": "off",
+    "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")]
   },
 };

@@ -7,7 +7,12 @@ import '../env.js';
 
 const { dir } = util;
 
+console.log(dir);
+
+
 const app = express();
+
+console.log(process.platform);
 
 app.engine('hbs', hbs({
   defaultLayout: 'main',
@@ -17,7 +22,7 @@ app.engine('hbs', hbs({
 app.set('dirname', dir);
 app.set('view engine', 'hbs');
 
-app.use(express.static(join(dir, 'public')));
+app.use(express.static(join(dir, 'src/public')));
 
 app.use(express.urlencoded({
   extended: false,
