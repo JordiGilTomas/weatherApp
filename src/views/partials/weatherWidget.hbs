@@ -1,0 +1,28 @@
+<section class="today">
+    <div class="today-weather">
+        <p class="city">El tiempo en <span>{{city}}</span></p>
+        <p>{{horaActual}}:{{minutosActualTwoDigits}} {{estadoHoraActual}}</p>
+        <img src="icons/tiempo/{{indexIconoHoraActual}}.svg" alt="" class="todayWeather">
+        <div class="today-weather-container-temperatura">
+            <p class="today-weather-temperatura">{{temperaturaActual}}o</p>
+            <p class="today-weather-sensacionTermica">Sensación de {{sensacionTermica}}o</p>
+        </div>
+
+        <div class="today-weather-container-precipitaciones">
+            <img src="" alt="">
+            <div class="porcentaje-container">
+                <p class="porcentaje">Precipitaciones</p>
+                <p class="cantidad">{{rainCantidad}} mm</p>
+            </div>
+            <div class="durante-container">
+                <button class="detalle">i</button>
+                <p class="durante">La mayor parte del día</p>
+                <p class="durante">{{estadoMayorParteDelDia}}</p>
+            </div>
+            <div class="next">
+                <button>></button>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

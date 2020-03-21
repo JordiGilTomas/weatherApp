@@ -1,0 +1,35 @@
+<section class="today">
+    <div class="today-weather">
+        <p class="today-weather-city block">El tiempo en Castellón de la Plana<span>{{city}}</span></p>
+        <p class="time bold block">21:23 Lluvia Debil</p>
+        {{!-- <p>{{horaActual}}:{{minutosActualTwoDigits}} {{estadoHoraActual}}</p> --}}
+        {{!-- <img src="icons/tiempo/{{indexIconoHoraActual}}.svg" alt="" class="todayWeather"> --}}
+        <div class="container-today">
+        <img src="icons/tiempo/15.svg" alt="" class="todayWeatherIcon">
+        <div class="today-weather-container-temperatura">
+            <p class="today-weather-temperatura block">{{temperaturaActual}}26<sup class="supBig">o</sup></p>
+            <p class="today-weather-sensacionTermica">Sensación de <span class="bold700">{{sensacionTermica}}27</span><sup class="supSmall bold">o</sup></span></p>
+        </div>
+
+        <div class="today-weather-container-precipitaciones">
+            <img class="paraguas" src="icons/lluvia/paraguas.png" alt="">
+            <div class="porcentaje-container">
+                <p class="porcentaje block">Cantidad</p>
+                <p class="cantidad block">{{rainCantidad}}0.1 mm</p>
+            </div>
+        </div>
+            <div class="durante-container">
+                <button class="btnDetalle">i</button>
+                <div class="durante-container-mayorParte">
+                    <p class="durante block bold subrayado">La mayor parte del día</p>
+                    <p class="duranteblock ">{{estadoMayorParteDelDia}} Se esperan lluvias débiles</p>
+                </div>
+            </div>
+            <div class="next">
+                <button>></button>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+</section>

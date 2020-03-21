@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+
+* {
+   margin: 0;
+   padding: 0;
+
+   font-family: 'Montserrat', 'sans-serif';
+}
+
+.today {
+    display: flex;
+    flex-wrap: wrap;
+
+    color: black;
+    height: 100vh;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+
+
+.today-weather {
+    display: flex;
+    flex-wrap: wrap;
+    height: 200px;
+    margin: 2em 3em;
+    background-color: #FF8506;
+    padding: 1em;
+}
+
+.today-weather-city {
+    font-size: 1.7rem;
+    font-weight: 500;
+
+    flex-basis: 100%;
+}
+
+.time {
+    margin-top: 1.5em;
+}
+
+.container-today {
+    margin: 1em 0;
+    display: flex;
+    height: fit-content;
+    align-content: flex-start;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.todayWeatherIcon {
+    width: 90px;
+    height: 90px;
+    margin-top: -0.5em;
+    margin-right: 0;
+}
+.bold {
+    font-weight: 500;
+}
+
+.supBig {
+    font-size: 2rem;
+    vertical-align: super;
+    line-height: 0rem;
+    vertical-align: top;
+    position: relative;
+    top: -5px
+}
+
+.bold700 {
+    font-weight: 700;
+}
+
+.block {
+    flex-basis: 100%;
+}
+
+.today-weather-temperatura {
+    font-size: 3.5rem;
+    font-weight: 500;
+    margin-top: 0.2em;
+    width: fit-content;
+    margin-right: auto;
+}
+.today-weather-sensacionTermica{
+    margin-top: 2em;
+    font-size: 0.9rem;
+}
+
+.today-weather-container-temperatura {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em;
+    line-height: 1.5rem;
+    height: fit-content;
+    width: fit-content;
+}
+
+.paraguas {
+    height:  35px;
+    margin-right: 0.5em;
+}
+
+
+
+.today-weather-container-precipitaciones {
+    display: flex;
+    height: fit-content;
+    align-self: flex-end;
+    margin-bottom: 2em;
+    margin-left: auto;
+}
+
+.porcentaje-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;;
+}
+
+.btnDetalle {
+    font-size: 1em;
+    background-color: transparent;
+    color: white;
+
+    border: none;
+    border: 2px solid white;
+    border-radius: 50%;
+    padding: 0 0.5em;
+    height: fit-content;
+    margin-right: 1em;
+    margin-bottom: 0.5em
+
+}
+
+.durante-container {
+    display: flex;
+    width: 25%;
+    align-items: flex-end;
+    margin-bottom: 2em;
+    margin-left: auto;
+}
+
+.durante-container-mayorParte {
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 1.5em;
+}
+
+.subrayado {
+    text-decoration: underline;
+}
+

@@ -1,14 +1,22 @@
 import express from 'express';
 import {
-    renderIndex, renderPaises, renderProvincias, renderLocalidades,
-} from '../controller/controller.js';
+    showIndex, showPaises, showProvincias, showLocalidades,
+} from '../controller/controllerIndex.js';
+
+import {
+    pronosticoCincoDiasTresHoras, pronosticoCincoDiasUnaHora, pronosticoSieteDias,
+} from '../controller/controllerPronostico.js';
 
 const router = express.Router();
 
-router.get('/', renderIndex);
+router.get('/', showIndex);
 
-router.get('/getPaises/:idContinente', renderPaises);
-router.get('/getProvincias/:idPais', renderProvincias);
-router.get('/getLocalidades/:idProvincia', renderLocalidades);
+router.get('/getPaises/:idContinente', showPaises);
+router.get('/getProvincias/:idPais', showProvincias);
+router.get('/getLocalidades/:idProvincia', showLocalidades);
+router.get('/getPronostico/CincoDiasTresHoras/:idLocalidad', pronosticoCincoDiasTresHoras);
+router.get('/getPronostico/CincoDiasUnaHora/:idLocalidad', pronosticoCincoDiasUnaHora);
+router.get('/getPronostico/SieteDias/:idLocalidad', pronosticoSieteDias);
+
 
 export default router;
