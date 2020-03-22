@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "heartsharearrowr";
+  src:url("fonts/heartsharearrowr.eot");
+  src:url("fonts/heartsharearrowr.eot?#iefix") format("embedded-opentype"),
+    url("fonts/heartsharearrowr.woff") format("woff"),
+    url("fonts/heartsharearrowr.ttf") format("truetype"),
+    url("fonts/heartsharearrowr.svg#heartsharearrowr") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "heartsharearrowr" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "heartsharearrowr" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+.icon-heart:before {
+  content: "\61";
+
+}
+.icon-share:before {
+  content: "\62";
+
+}
+.icon-arrowR:before {
+  content: "\63";
+
+}

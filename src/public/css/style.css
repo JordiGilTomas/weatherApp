@@ -3,48 +3,63 @@
 * {
    margin: 0;
    padding: 0;
-
    font-family: 'Montserrat', 'sans-serif';
 }
 
-.today {
+.weather {
     display: flex;
     flex-wrap: wrap;
-
+    align-content: flex-start;
     color: black;
     height: 100vh;
     max-width: 1024px;
+    min-width: 1024px;
     margin: 0 auto;
+    background-color: dimgray;
 }
-
-
-
 .today-weather {
-    display: flex;
-    flex-wrap: wrap;
-    height: 200px;
-    margin: 2em 3em;
-    background-color: #FF8506;
-    padding: 1em;
+    display: grid;
+    width: 100%;
+    margin: 2em 10% 0 10%;
+    background-color: cornsilk;
+    padding: 1em 3em;
 }
 
 .today-weather-city {
     font-size: 1.7rem;
     font-weight: 500;
-
     flex-basis: 100%;
 }
 
+.today-weahter-time{
+    display: flex;
+    align-items: center;
+}
+
+.today-weahter-time span{
+    margin-left: auto;
+}
+
+.today-weahter-time i{
+    font-size: 1.5rem;
+    margin-left: 0.5em;
+    vertical-align: -50%;
+}
+
 .time {
-    margin-top: 1.5em;
+    font-size: 1rem;
+}
+
+.bold500 {
+    font-weight: 500;
 }
 
 .container-today {
+    display: grid;
+    grid-template-columns: 1fr minmax(157px, 2fr) minmax(200px, 3fr) minmax(200px, 4fr) 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
     margin: 1em 0;
-    display: flex;
-    height: fit-content;
-    align-content: flex-start;
-    justify-content: space-around;
     width: 100%;
 }
 
@@ -82,12 +97,15 @@
     width: fit-content;
     margin-right: auto;
 }
+
 .today-weather-sensacionTermica{
-    margin-top: 2em;
+    margin-top: 1em;
     font-size: 0.9rem;
 }
 
 .today-weather-container-temperatura {
+    grid-column: 2;
+    grid-row: 1;
     display: flex;
     flex-wrap: wrap;
     margin: 1em;
@@ -101,14 +119,10 @@
     margin-right: 0.5em;
 }
 
-
-
 .today-weather-container-precipitaciones {
     display: flex;
-    height: fit-content;
-    align-self: flex-end;
-    margin-bottom: 2em;
-    margin-left: auto;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .porcentaje-container {
@@ -117,26 +131,23 @@
     height: fit-content;;
 }
 
+.flexWrap {
+    display: flex;
+}
 .btnDetalle {
     font-size: 1em;
     background-color: transparent;
-    color: white;
-
-    border: none;
-    border: 2px solid white;
+    color: black;
+    border: 1px solid black;
     border-radius: 50%;
     padding: 0 0.5em;
     height: fit-content;
     margin-right: 1em;
-    margin-bottom: 0.5em
-
 }
 
 .durante-container {
     display: flex;
-    width: 25%;
-    align-items: flex-end;
-    margin-bottom: 2em;
+    align-items: center;
     margin-left: auto;
 }
 
@@ -150,3 +161,102 @@
     text-decoration: underline;
 }
 
+.next {
+    display: flex;
+}
+.btnNext {
+    margin-left: auto;
+    font-size: 2rem;
+    background-color: transparent;
+    border: navajowhite;
+    color: white;
+    vertical-align: baseline;
+}
+
+.next .icon-arrowR {
+    font-size: 1.5rem;
+    color: black;
+}
+
+.week-weather {
+    display: grid;
+    grid-template-columns: 1fr repeat(6, 1fr);
+    width: 100%;
+    background-color: midnightblue;
+    font-size: 0.7rem;
+    margin: 0 10%;
+
+}
+.week-today:first-child {
+    flex: 1;
+    text-align: center;
+    color: white;
+    background-color: purple;
+    padding: 1em 0;
+}
+
+.bottom05 {
+    margin-bottom: 0.5em;
+}
+
+.week-today p {
+    margin: 0.2em;
+}
+.week-weather p:first-child{
+    font-size: 0.8rem;
+}
+
+
+.weekWeatherIcon {
+    width: 50px;
+    height: 50px;
+}
+
+.week-weather-paraguas {
+    display: block;
+    height: 25px;
+    filter: invert(1);
+    margin: auto;
+}
+
+.week-days {
+    flex: 1;
+    text-align: center;
+    color: white;
+    padding: 1em 0;
+}
+
+.weekWindIcon {
+    height: 25px;
+}
+
+
+.week-today-rangoTemperatura {
+    padding: 0.5em 0;
+    font-size: 1rem;
+}
+
+
+/* @media screen and (max-width: 1000px) {
+    .container-today {
+      grid-template-areas:
+        "nube temperatura temperatura temperatura temperatura"
+        "paraguas paraguas mayor mayor next";
+    }
+    .durante-container {
+        grid-area: mayor;
+        grid-column: auto;
+        margin-left: auto;
+    }
+
+    .today-weather-container-precipitaciones{
+        grid-area: paraguas;
+    }
+    .porcentaje-container p {
+        width: fit-content;
+    }
+    .next {
+        grid-area: next;
+        grid-column: auto;
+    }
+} */
