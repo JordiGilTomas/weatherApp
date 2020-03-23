@@ -6,6 +6,23 @@
    font-family: 'Montserrat', 'sans-serif';
 }
 
+header {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.selection {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 2em auto 0em;
+    background-color: rgba(76, 0, 130, 0.24);
+    width: 815px;
+}
+
+select {
+    width: 25%;
+    margin: 1em;
+}
 .weather {
     display: flex;
     flex-wrap: wrap;
@@ -15,12 +32,12 @@
     max-width: 1024px;
     min-width: 1024px;
     margin: 0 auto;
-    background-color: dimgray;
+
 }
 .today-weather {
     display: grid;
     width: 100%;
-    margin: 2em 10% 0 10%;
+    margin: 0em 10%;
     background-color: cornsilk;
     padding: 1em 3em;
 }
@@ -114,10 +131,11 @@
     width: fit-content;
 }
 
-.paraguas {
-    height:  35px;
-    margin-right: 0.5em;
+.paraguas, .luna {
+    margin: auto 0.5em auto 0;
+    height:  2em;
 }
+
 
 .today-weather-container-precipitaciones {
     display: flex;
@@ -187,7 +205,7 @@
     margin: 0 10%;
 
 }
-.week-today:first-child {
+.week-weather div:first-child {
     flex: 1;
     text-align: center;
     color: white;
@@ -199,7 +217,7 @@
     margin-bottom: 0.5em;
 }
 
-.week-today p {
+.week-weather  p {
     margin: 0.2em;
 }
 .week-weather p:first-child{
@@ -219,11 +237,15 @@
     margin: auto;
 }
 
-.week-days {
+.week-weather div:not(:first-child) {
     flex: 1;
     text-align: center;
     color: white;
     padding: 1em 0;
+}
+
+.week-weather div:not(:first-child) p:first-child {
+    text-transform: uppercase;
 }
 
 .weekWindIcon {

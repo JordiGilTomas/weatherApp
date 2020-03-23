@@ -1,7 +1,7 @@
 <header>
-    <h1>El tiempo en Castellón de la Plana</h1>
+    <h1>El Tiempo</h1>
 </header>
-
+<div class="selection">
 <select name="continentes" id="continentes">
     {{#each continentes}}
         <option value="{{name.id}}">{{name._}}</option>
@@ -16,6 +16,7 @@
 <select name="localidades" id="localidades">
 
 </select>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
 <script src="js/weatherWidget.precompiled.js"></script>

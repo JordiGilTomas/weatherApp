@@ -4,7 +4,7 @@ import {
 
 export const showIndex = async (req, res) => {
     const continentes = await getDataFromWeatherAPI();
-    res.render('weatherWidget', { continentes });
+    res.render('index', { continentes });
 };
 
 export const showPaises = async (req, res) => {
