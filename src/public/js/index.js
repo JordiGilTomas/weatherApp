@@ -2,30 +2,49 @@ const continenteSelect = document.getElementById('continentes');
 const paisSelect = document.getElementById('paises');
 const provinciaSelect = document.getElementById('provincias');
 const localidadSelect = document.getElementById('localidades');
+const ciudadInput = document.getElementById('ciudadInput');
+
 
 const getPaises = async (e) => {
+    if (continenteSelect.querySelector('#optionTitle')) continenteSelect.removeChild(continenteSelect.options[0]);
+    provinciaSelect.innerHTML = '';
+    localidadSelect.innerHTML = '';
     const idContinente = e.target.value;
     const paises = [...await (await fetch(`http://localhost:4000/getPaises/${idContinente}`)).json()];
-    paisSelect.innerHTML = '';
+    paisSelect.innerHTML = '<option id="optionTitle">Elige País</option>';
     paises.forEach((pais) => {
         paisSelect.innerHTML += `<option value=${pais.name.id}>${pais.name._}</option>`;
     });
+    // Lanzamos evento Change
+    // porque si hay sólo un pais(Antartida) en el continente no podemos usar el evento change.
+    if (paises.length === 1) paisSelect.dispatchEvent(new Event('change'));
 };
 
 const getProvincias = async (e) => {
+    if (paisSelect.querySelector('#optionTitle')) paisSelect.removeChild(paisSelect.options[0]);
     const idPais = e.target.value;
+    localidadSelect.innerHTML = '';
     const provincias = [...await (await fetch(`http://localhost:4000/getProvincias/${idPais}`)).json()];
     provinciaSelect.innerHTML = '';
     provincias.forEach((provincia) => {
+        // Hay Paises que no tienen provincias (ej: Africa -> Benin)
+        // Entonces el pais nos devuelve directamente las localidades
+        if (provincia.url.includes('localidad')) {
+            if (!localidadSelect.querySelector('#optionTitle')) localidadSelect.innerHTML = '<option id="optionTitle">Elige Localidad</option>';
+            localidadSelect.innerHTML += `<option value=${provincia.name.id}>${provincia.name._}</option>`;
+        } else {
+            if (!provinciaSelect.querySelector('#optionTitle')) provinciaSelect.innerHTML = '<option id="optionTitle">Elige Provincia</option>';
         provinciaSelect.innerHTML += `<option value=${provincia.name.id}>${provincia.name._}</option>`;
+        }
     });
 };
 
 const getLocalidades = async (e) => {
+    if (provinciaSelect.querySelector('#optionTitle')) provinciaSelect.removeChild(provinciaSelect.options[0]);
     const idProvincia = e.target.value;
     localidadSelect.innerHTML = '<option>Loading data...</option>';
     const localidades = [...await (await fetch(`http://localhost:4000/getLocalidades/${idProvincia}`)).json()];
-    localidadSelect.innerHTML = '';
+    localidadSelect.innerHTML = '<option id="optionTitle">Elige Localidad</option>';
     localidades.forEach((localidad) => {
         localidadSelect.innerHTML += `<option value=${localidad.name.id}>${localidad.name._}</option>`;
     });
@@ -45,7 +64,10 @@ const encuentraEstadoMasRepetido = (pronosticoPorHoras) => {
 
 
 const getPronosticos = async (e) => {
+    if (localidadSelect.querySelector('#optionTitle')) localidadSelect.removeChild(localidadSelect.options[0]);
+
     const idLocalidad = e.target.value;
+    console.log('Getting pronosticos', idLocalidad);
     const cincoDiasTresHoras = [...await (await fetch(`http://localhost:4000/getPronostico/CincoDiasTresHoras/${idLocalidad}`)).json()];
     const cincoDiasUnaHora = [...await (await fetch(`http://localhost:4000/getPronostico/CincoDiasUnaHora/${idLocalidad}`)).json()];
     const sieteDias = [...await (await fetch(`http://localhost:4000/getPronostico/SieteDias/${idLocalidad}`)).json()];
@@ -61,16 +83,8 @@ const getPronosticos = async (e) => {
     const estadoMayorParteDelDia = encuentraEstadoMasRepetido(cincoDiasUnaHora[0].hour);
     const iconoLuna = cincoDiasUnaHora[0].moon.symbol;
     const luna = cincoDiasUnaHora[0].moon.desc;
-    console.log("luna", luna);
-
     const tipoLuna = luna.slice(0, luna.indexOf(','));
-    console.log("luna", luna, "tipoLuna", tipoLuna);
-
     const descripcionLuna = luna.slice(luna.indexOf(',') + 2);
-
-    console.log("luna", luna, "tipoLuna", tipoLuna, "desc", descripcionLuna);
-
-
 
     const weatherToday = {
         city: e.target.selectedOptions[0].text,
@@ -148,6 +162,7 @@ const getPronosticos = async (e) => {
         weatherWeek[indexDia].diaAndMes = diaAndMes;
     });
 
+    // Mostramos Widget usando Handlebars Partial
     const template = Handlebars.templates['weatherWidget.hbs'];
     if (document.querySelector('#widget')) {
         document.querySelector('#widget').innerHTML = template({ weatherToday, weatherWeek });
@@ -157,9 +172,34 @@ const getPronosticos = async (e) => {
         widget.innerHTML = template({ weatherToday, weatherWeek });
         document.body.appendChild(widget);
     }
+    const heart = document.getElementById('heart');
+    heart.addEventListener('click', () => {
+        heart.className = (heart.className.includes('unselected') ? 'icon-heart-selected' : 'icon-heart-unselected');
+    });
+    const share = document.getElementById('share');
+    share.addEventListener('click', () => {
+       share.firstElementChild.classList.toggle('show');
+    });
 };
 
-
+const muestraCiudades = async (e) => {
+    const ciudadesEncontradas = [];
+    if (e.target.value.length > 2) {
+        const ciudades = [...await (await fetch(`http://localhost:4000/getCiudades/${e.target.value}`)).json()];
+        ciudades[0].localidad.forEach((ciudad) => {
+            if (ciudad.nivel === 4) {
+                ciudadesEncontradas.push({
+                    id: ciudad.id,
+                    nombre: ciudad.nombre,
+                    pais: ciudad.pais,
+                 });
+            }
+        });
+        const template = Handlebars.templates['ciudadesSelect.hbs'];
+        document.querySelector('#resultadoCiudades').innerHTML = template({ ciudadesEncontradas });
+        console.log(ciudadesEncontradas);
+    }
+};
 // https://www.tiempo.com/css/2018/icons/banderas18/*.svg
 
 
@@ -167,3 +207,4 @@ continenteSelect.addEventListener('change', getPaises);
 paisSelect.addEventListener('change', getProvincias);
 provinciaSelect.addEventListener('change', getLocalidades);
 localidadSelect.addEventListener('change', getPronosticos);
+ciudadInput.addEventListener('keyup', muestraCiudades);

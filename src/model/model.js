@@ -15,7 +15,10 @@ export const getDataFromWeatherAPI = async (buscar = '&continente=0', version = 
         if (version === '') return datos.location.var;
         return datos.location.day;
     }
-    return datos.location.data;
+    if (Array.isArray(datos.location.data)) {
+        return datos.location.data;
+    }
+    return [datos.location.data];
 };
 
 export const getPaises = (continente) => getDataFromWeatherAPI(`&continente=${continente}`);
@@ -29,3 +32,5 @@ export const getPronosticoSieteDias = (localidad) => getDataFromWeatherAPI(`&loc
 export const getPronosticoCincoDiasTresHoras = (localidad) => getDataFromWeatherAPI(`&localidad=${localidad}`, '&v=2');
 
 export const getPronosticoCincoDiasUnaHora = (localidad) => getDataFromWeatherAPI(`&localidad=${localidad}`, '&v=2&h=1');
+
+export const getCiudades = async (fragmento) => fetch(`https://www.tiempo.com/peticionBuscador.php?lang=es&texto=${fragmento}&affiliate_id=pui9u641rfkj`);

@@ -3,6 +3,7 @@
 </header>
 <div class="selection">
 <select name="continentes" id="continentes">
+    <option id="optionTitle">Elige Continente</option>
     {{#each continentes}}
         <option value="{{name.id}}">{{name._}}</option>
     {{/each}}
@@ -17,8 +18,13 @@
 
 </select>
 </div>
+<div class="inputCiudad">
+    <input type="text" name="ciudadInput" id="ciudadInput" placeholder="Buscar directamente por ciudad">
+    <div class="resultadoCiudades" id="resultadoCiudades"></div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
 <script src="js/weatherWidget.precompiled.js"></script>
+<script src="js/ciudadesSelect.precompiled.js"></script>
 <script src="js/index.js"></script>
 

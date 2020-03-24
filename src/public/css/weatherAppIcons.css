@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "weatherappicons";
+  src:url("fonts/weatherappicons.eot");
+  src:url("fonts/weatherappicons.eot?#iefix") format("embedded-opentype"),
+    url("fonts/weatherappicons.woff") format("woff"),
+    url("fonts/weatherappicons.ttf") format("truetype"),
+    url("fonts/weatherappicons.svg#weatherappicons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "weatherappicons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "weatherappicons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-heart-unselected:before {
+  content: "\61";
+}
+.icon-arrow-right:before {
+  content: "\63";
+}
+.icon-heart-selected:before {
+  content: "\64";
+}
+.icon-share:before {
+  content: "\65";
+}
+.icon-social-facebook:before {
+  content: "\62";
+}
+.icon-social-twitter:before {
+  content: "\66";
+}
+.icon-social-linkedin:before {
+  content: "\67";
+}
+.icon-social-pinterest:before {
+  content: "\68";
+}
+.icon-social-mail:before {
+  content: "\69";
+}
+.icon-social-tumblr:before {
+  content: "\6a";
+}
+.icon-social-xing:before {
+  content: "\6b";
+}
+.icon-social-print:before {
+  content: "\6c";
+}

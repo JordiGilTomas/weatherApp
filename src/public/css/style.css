@@ -11,18 +11,59 @@ header {
     margin-top: 1em;
 }
 
-.selection {
+.selection{
     display: flex;
     justify-content: space-evenly;
-    margin: 2em auto 0em;
+    margin: 2em auto 0 auto;
     background-color: rgba(76, 0, 130, 0.24);
     width: 815px;
 }
-
-select {
+.selection select {
     width: 25%;
     margin: 1em;
 }
+
+.inputCiudad {
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: rgba(76, 0, 130, 0.24);
+    width: 815px;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.inputCiudad input {
+    width: 50%;
+    padding: 0.5em;
+}
+
+.resultadoCiudades{
+    position: absolute;
+    top: 3em;
+    width: 50%;
+    background-color: linen;
+}
+
+dl {
+    border: 1px solid black;
+}
+
+dd {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+dd:hover {
+    background-color: rgb(243, 211, 182);
+}
+
+dd img {
+    margin-left: 1em;
+}
+
 .weather {
     display: flex;
     flex-wrap: wrap;
@@ -67,13 +108,55 @@ select {
     font-size: 1rem;
 }
 
+.icons {
+    cursor: pointer;
+}
+.icon-heart-selected {
+    color: red;
+}
+
+.icon-share {
+    position: relative;
+}
+
+
+
+.socialIcons {
+    font-family: 'weatherappicons';
+    justify-content: space-around;
+    position: absolute;
+    top: 0em;
+    left: -11em;
+    display: flex;
+    flex-wrap: wrap;
+    width: 13em;
+    color: blue;
+    border: 1px solid black;
+    padding: 0.1em 0;
+    line-height: 0.7em;
+    background-color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+.socialIcons i {
+    margin: 0 0.25em;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+    top: 1.25em;
+}
+
 .bold500 {
     font-weight: 500;
 }
 
 .container-today {
     display: grid;
-    grid-template-columns: 1fr minmax(157px, 2fr) minmax(200px, 3fr) minmax(200px, 4fr) 1fr;
+    grid-template-columns: 1fr minmax(165px, 2fr) minmax(200px, 3fr) minmax(220px, 4fr) 1fr;
     grid-template-rows: 1fr;
     align-items: center;
     margin: 1em 0;
@@ -191,7 +274,7 @@ select {
     vertical-align: baseline;
 }
 
-.next .icon-arrowR {
+.next .icon-arrow-right {
     font-size: 1.5rem;
     color: black;
 }
