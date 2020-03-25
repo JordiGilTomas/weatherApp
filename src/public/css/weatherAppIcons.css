@@ -42,16 +42,16 @@
   content: "\61";
 }
 .icon-arrow-right:before {
-  content: "\63";
-}
-.icon-heart-selected:before {
   content: "\64";
 }
+.icon-heart-selected:before {
+  content: "\62";
+}
 .icon-share:before {
-  content: "\65";
+  content: "\63";
 }
 .icon-social-facebook:before {
-  content: "\62";
+  content: "\65";
 }
 .icon-social-twitter:before {
   content: "\66";
@@ -73,4 +73,7 @@
 }
 .icon-social-print:before {
   content: "\6c";
+}
+.icon-placepin:before {
+  content: "\6d";
 }

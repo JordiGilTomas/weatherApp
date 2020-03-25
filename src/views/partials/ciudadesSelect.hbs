@@ -1,5 +1,23 @@
-<dl class="ciudadesSelect" name="ciudadesSelect" id="ciudadesSelect">
+<ul id="ciudadUl" class="ciudadUl">
 {{#each ciudadesEncontradas}}
-    <dd value="{{id}}">{{nombre}}<img src="https://www.tiempo.com/css/2018/icons/banderas18/{{pais}}.svg" alt=""></dd>
+    <li value="{{id}}">
+        <span class="li-ciudad-locationIcon">
+            <i class="icon-placepin"></i>
+        </span>
+        <span class="li-ciudad">
+            <span class="li-ciudad-nombre-container">
+                <span class="li-ciudad-nombre">{{ciudad}}</span>
+                <span class="li-ciudad-continente">{{continente}}</span>
+            </span>
+            <span class="li-ciudad-comunidad-container">
+                <span class="li-ciudad-comunidad">{{comunidad}},</span>
+                <span class="li-ciudad-provincia">{{provincia}}</span>
+            </span>
+
+        </span>
+        <span class="li-ciudad-bandera">
+            <img src="https://www.tiempo.com/css/2018/icons/banderas18/{{pais}}.svg" alt="">
+        </span>
+        </li>
 {{/each}}
-</dl>
+</ul>

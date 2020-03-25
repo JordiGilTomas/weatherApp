@@ -34,25 +34,29 @@ const getProvincias = async (e) => {
             localidadSelect.innerHTML += `<option value=${provincia.name.id}>${provincia.name._}</option>`;
         } else {
             if (!provinciaSelect.querySelector('#optionTitle')) provinciaSelect.innerHTML = '<option id="optionTitle">Elige Provincia</option>';
-        provinciaSelect.innerHTML += `<option value=${provincia.name.id}>${provincia.name._}</option>`;
+            provinciaSelect.innerHTML += `<option value=${provincia.name.id}>${provincia.name._}</option>`;
         }
     });
 };
 
 const getLocalidades = async (e) => {
+
     if (provinciaSelect.querySelector('#optionTitle')) provinciaSelect.removeChild(provinciaSelect.options[0]);
     const idProvincia = e.target.value;
     localidadSelect.innerHTML = '<option>Loading data...</option>';
     const localidades = [...await (await fetch(`http://localhost:4000/getLocalidades/${idProvincia}`)).json()];
-    localidadSelect.innerHTML = '<option id="optionTitle">Elige Localidad</option>';
-    localidades.forEach((localidad) => {
-        localidadSelect.innerHTML += `<option value=${localidad.name.id}>${localidad.name._}</option>`;
-    });
+    if (localidades[0].error) {
+        localidadSelect.innerHTML = '<option id="optionTitle">Datos no disponibles</option>';
+    } else {
+        localidadSelect.innerHTML = '<option id="optionTitle">Elige Localidad</option>';
+        localidades.forEach((localidad) => {
+            localidadSelect.innerHTML += `<option value=${localidad.name.id}>${localidad.name._}</option>`;
+        });
+    }
 };
 
 const encuentraEstadoMasRepetido = (pronosticoPorHoras) => {
     const estados = [];
-
     pronosticoPorHoras.forEach((estadoHora) => {
         const estadoRepetido = estados.find((estado) => estado.desc2 === estadoHora.symbol.desc2);
         if (estadoRepetido) estadoRepetido.cantidad += 1;
@@ -67,12 +71,12 @@ const getPronosticos = async (e) => {
     if (localidadSelect.querySelector('#optionTitle')) localidadSelect.removeChild(localidadSelect.options[0]);
 
     const idLocalidad = e.target.value;
-    console.log('Getting pronosticos', idLocalidad);
+
     const cincoDiasTresHoras = [...await (await fetch(`http://localhost:4000/getPronostico/CincoDiasTresHoras/${idLocalidad}`)).json()];
     const cincoDiasUnaHora = [...await (await fetch(`http://localhost:4000/getPronostico/CincoDiasUnaHora/${idLocalidad}`)).json()];
     const sieteDias = [...await (await fetch(`http://localhost:4000/getPronostico/SieteDias/${idLocalidad}`)).json()];
 
-
+    const city = cincoDiasTresHoras[0].city.split('[')[0];
     const horaActual = new Date().getHours();
     const minutosActualTwoDigits = `0${new Date().getMinutes().toString()}`.slice(-2);
     const estadoHoraActual = cincoDiasUnaHora[0].hour[horaActual].symbol.desc2;
@@ -87,7 +91,7 @@ const getPronosticos = async (e) => {
     const descripcionLuna = luna.slice(luna.indexOf(',') + 2);
 
     const weatherToday = {
-        city: e.target.selectedOptions[0].text,
+        city,
         horaActual,
         minutosActualTwoDigits,
         estadoHoraActual,
@@ -178,7 +182,7 @@ const getPronosticos = async (e) => {
     });
     const share = document.getElementById('share');
     share.addEventListener('click', () => {
-       share.firstElementChild.classList.toggle('show');
+        share.firstElementChild.classList.toggle('show');
     });
 };
 
@@ -190,14 +194,27 @@ const muestraCiudades = async (e) => {
             if (ciudad.nivel === 4) {
                 ciudadesEncontradas.push({
                     id: ciudad.id,
-                    nombre: ciudad.nombre,
+                    ciudad: ciudad.nombre,
                     pais: ciudad.pais,
-                 });
+                    provincia: ciudad.jerarquia[0],
+                    comunidad: ciudad.jerarquia[1],
+                    continente: ciudad.jerarquia[3],
+                });
             }
         });
         const template = Handlebars.templates['ciudadesSelect.hbs'];
         document.querySelector('#resultadoCiudades').innerHTML = template({ ciudadesEncontradas });
-        console.log(ciudadesEncontradas);
+        document.getElementById('ciudadUl').addEventListener('click', (item) => {
+            const idCiudad = {
+                target: { value: 0 },
+            };
+            idCiudad.target.value = (item.target.tagName === 'LI') ? item.target.value : item.composedPath().filter((i) => i.tagName === 'LI')[0].value;
+            getPronosticos(idCiudad);
+            document.getElementById('resultadoCiudades').innerHTML = '';
+            ciudadInput.value = '';
+        });
+    } else if (document.querySelector('#resultadoCiudades')) {
+        document.querySelector('#resultadoCiudades').innerHTML = '';
     }
 };
 // https://www.tiempo.com/css/2018/icons/banderas18/*.svg

@@ -6,6 +6,12 @@
    font-family: 'Montserrat', 'sans-serif';
 }
 
+body {
+    height: 100vh;
+    width: 1024px;
+    margin: auto;
+}
+
 header {
     text-align: center;
     margin-top: 1em;
@@ -32,37 +38,76 @@ header {
     display: flex;
     justify-content: center;
     position: relative;
+    z-index: 10;
 }
 .inputCiudad input {
-    width: 50%;
+    width: 75%;
     padding: 0.5em;
 }
 
 .resultadoCiudades{
     position: absolute;
     top: 3em;
-    width: 50%;
+    width: 74%;
     background-color: linen;
 }
 
-dl {
-    border: 1px solid black;
-}
-
-dd {
+li {
+    list-style: none;
     display: flex;
-    justify-content: space-between;
-    margin: 0.5em;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
     cursor: pointer;
+    margin: 0em 0;
+    padding: 0.5em 0;
+
 }
 
-dd:hover {
-    background-color: rgb(243, 211, 182);
+li:hover {
+    background-color: rgb(248, 204, 159);
 }
 
-dd img {
-    margin-left: 1em;
+.li-ciudad-locationIcon {
+    display: flex;
+    align-items: center;
+    color:blue;
+    justify-content: center;
+    width: 2em;
+
 }
+
+.li-ciudad {
+    display: flex;
+    flex-direction: column;
+}
+
+.li-ciudad-nombre-container {
+    margin-left: 0em;
+}
+
+.li-ciudad-comunidad-container {
+    font-size: 0.9em;
+    margin-left: 0em;
+}
+
+.li-ciudad-nombre {
+
+    font-weight: 700;
+}
+
+.li-ciudad-continente {
+    background-color: rgb(228, 222, 222);
+    margin-left: 2em;
+}
+
+.li-ciudad-bandera {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 1em;
+}
+
+
 
 .weather {
     display: flex;
@@ -71,7 +116,7 @@ dd img {
     color: black;
     height: 100vh;
     max-width: 1024px;
-    min-width: 1024px;
+    /* min-width: 1024px; */
     margin: 0 auto;
 
 }
@@ -81,6 +126,7 @@ dd img {
     margin: 0em 10%;
     background-color: cornsilk;
     padding: 1em 3em;
+    z-index: -1;
 }
 
 .today-weather-city {
@@ -110,6 +156,7 @@ dd img {
 
 .icons {
     cursor: pointer;
+    z-index: 1;
 }
 .icon-heart-selected {
     color: red;
@@ -179,7 +226,7 @@ dd img {
     line-height: 0rem;
     vertical-align: top;
     position: relative;
-    top: -5px
+    top: -5px;
 }
 
 .bold700 {
@@ -340,28 +387,3 @@ dd img {
     padding: 0.5em 0;
     font-size: 1rem;
 }
-
-
-/* @media screen and (max-width: 1000px) {
-    .container-today {
-      grid-template-areas:
-        "nube temperatura temperatura temperatura temperatura"
-        "paraguas paraguas mayor mayor next";
-    }
-    .durante-container {
-        grid-area: mayor;
-        grid-column: auto;
-        margin-left: auto;
-    }
-
-    .today-weather-container-precipitaciones{
-        grid-area: paraguas;
-    }
-    .porcentaje-container p {
-        width: fit-content;
-    }
-    .next {
-        grid-area: next;
-        grid-column: auto;
-    }
-} */
