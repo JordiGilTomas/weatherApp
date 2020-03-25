@@ -21,6 +21,7 @@ app.engine('hbs', hbs({
 
 app.set('dirname', dir);
 app.set('view engine', 'hbs');
+app.set('port', process.env.PORT || 4000);
 
 app.use(express.static(join(dir, 'src/public')));
 
@@ -30,4 +31,4 @@ app.use(express.urlencoded({
 
 app.use('/', router);
 
-app.listen(4000, () => console.log('Servidor arrancado'));
+app.listen(app.get('port'), () => console.log(`Servidor arrancado en puerto ${app.get('port')}`));

@@ -126,7 +126,7 @@ li:hover {
     margin: 0em 10%;
     background-color: cornsilk;
     padding: 1em 3em;
-    z-index: -1;
+    z-index: 0;
 }
 
 .today-weather-city {
@@ -156,7 +156,7 @@ li:hover {
 
 .icons {
     cursor: pointer;
-    z-index: 1;
+    z-index: 100;
 }
 .icon-heart-selected {
     color: red;

@@ -3,6 +3,7 @@ const paisSelect = document.getElementById('paises');
 const provinciaSelect = document.getElementById('provincias');
 const localidadSelect = document.getElementById('localidades');
 const ciudadInput = document.getElementById('ciudadInput');
+const url = window.location.href;
 
 
 const getPaises = async (e) => {
@@ -10,7 +11,7 @@ const getPaises = async (e) => {
     provinciaSelect.innerHTML = '';
     localidadSelect.innerHTML = '';
     const idContinente = e.target.value;
-    const paises = [...await (await fetch(`http://localhost:4000/getPaises/${idContinente}`)).json()];
+    const paises = [...await (await fetch(`${url}getPaises/${idContinente}`)).json()];
     paisSelect.innerHTML = '<option id="optionTitle">Elige País</option>';
     paises.forEach((pais) => {
         paisSelect.innerHTML += `<option value=${pais.name.id}>${pais.name._}</option>`;
@@ -24,7 +25,7 @@ const getProvincias = async (e) => {
     if (paisSelect.querySelector('#optionTitle')) paisSelect.removeChild(paisSelect.options[0]);
     const idPais = e.target.value;
     localidadSelect.innerHTML = '';
-    const provincias = [...await (await fetch(`http://localhost:4000/getProvincias/${idPais}`)).json()];
+    const provincias = [...await (await fetch(`${url}getProvincias/${idPais}`)).json()];
     provinciaSelect.innerHTML = '';
     provincias.forEach((provincia) => {
         // Hay Paises que no tienen provincias (ej: Africa -> Benin)
@@ -44,7 +45,7 @@ const getLocalidades = async (e) => {
     if (provinciaSelect.querySelector('#optionTitle')) provinciaSelect.removeChild(provinciaSelect.options[0]);
     const idProvincia = e.target.value;
     localidadSelect.innerHTML = '<option>Loading data...</option>';
-    const localidades = [...await (await fetch(`http://localhost:4000/getLocalidades/${idProvincia}`)).json()];
+    const localidades = [...await (await fetch(`${url}getLocalidades/${idProvincia}`)).json()];
     if (localidades[0].error) {
         localidadSelect.innerHTML = '<option id="optionTitle">Datos no disponibles</option>';
     } else {
@@ -72,9 +73,9 @@ const getPronosticos = async (e) => {
 
     const idLocalidad = e.target.value;
 
-    const cincoDiasTresHoras = [...await (await fetch(`http://localhost:4000/getPronostico/CincoDiasTresHoras/${idLocalidad}`)).json()];
-    const cincoDiasUnaHora = [...await (await fetch(`http://localhost:4000/getPronostico/CincoDiasUnaHora/${idLocalidad}`)).json()];
-    const sieteDias = [...await (await fetch(`http://localhost:4000/getPronostico/SieteDias/${idLocalidad}`)).json()];
+    const cincoDiasTresHoras = [...await (await fetch(`${url}getPronostico/CincoDiasTresHoras/${idLocalidad}`)).json()];
+    const cincoDiasUnaHora = [...await (await fetch(`${url}getPronostico/CincoDiasUnaHora/${idLocalidad}`)).json()];
+    const sieteDias = [...await (await fetch(`${url}getPronostico/SieteDias/${idLocalidad}`)).json()];
 
     const city = cincoDiasTresHoras[0].city.split('[')[0];
     const horaActual = new Date().getHours();
@@ -189,7 +190,7 @@ const getPronosticos = async (e) => {
 const muestraCiudades = async (e) => {
     const ciudadesEncontradas = [];
     if (e.target.value.length > 2) {
-        const ciudades = [...await (await fetch(`http://localhost:4000/getCiudades/${e.target.value}`)).json()];
+        const ciudades = [...await (await fetch(`${url}getCiudades/${e.target.value}`)).json()];
         ciudades[0].localidad.forEach((ciudad) => {
             if (ciudad.nivel === 4) {
                 ciudadesEncontradas.push({
@@ -217,8 +218,6 @@ const muestraCiudades = async (e) => {
         document.querySelector('#resultadoCiudades').innerHTML = '';
     }
 };
-// https://www.tiempo.com/css/2018/icons/banderas18/*.svg
-
 
 continenteSelect.addEventListener('change', getPaises);
 paisSelect.addEventListener('change', getProvincias);
