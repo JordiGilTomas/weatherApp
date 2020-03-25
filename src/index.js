@@ -21,6 +21,7 @@ app.engine('hbs', hbs({
 
 app.set('dirname', dir);
 app.set('view engine', 'hbs');
+app.set('views', join(dir, 'src/views'));
 app.set('port', process.env.PORT || 4000);
 
 app.use(express.static(join(dir, 'src/public')));
