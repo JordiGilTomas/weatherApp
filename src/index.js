@@ -1,4 +1,5 @@
 import express from 'express';
+import morgan from 'morgan';
 import hbs from 'express-handlebars';
 import { join } from 'path';
 import * as util from '../util.js';
@@ -29,6 +30,8 @@ app.use(express.static(join(dir, 'src/public')));
 app.use(express.urlencoded({
   extended: false,
 }));
+
+app.use(morgan('common'));
 
 app.use('/', router);
 
