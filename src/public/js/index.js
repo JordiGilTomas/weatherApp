@@ -5,7 +5,6 @@ const localidadSelect = document.getElementById('localidades');
 const ciudadInput = document.getElementById('ciudadInput');
 const url = window.location.href;
 
-
 const getPaises = async (e) => {
     if (continenteSelect.querySelector('#optionTitle')) continenteSelect.removeChild(continenteSelect.options[0]);
     provinciaSelect.innerHTML = '';
@@ -41,18 +40,18 @@ const getProvincias = async (e) => {
 };
 
 const getLocalidades = async (e) => {
-
     if (provinciaSelect.querySelector('#optionTitle')) provinciaSelect.removeChild(provinciaSelect.options[0]);
     const idProvincia = e.target.value;
-    localidadSelect.innerHTML = '<option>Loading data...</option>';
+    localidadSelect.innerHTML = '<option id="loading" value="0">Loading data...</option>';
     const localidades = [...await (await fetch(`${url}getLocalidades/${idProvincia}`)).json()];
     if (localidades[0].error) {
         localidadSelect.innerHTML = '<option id="optionTitle">Datos no disponibles</option>';
     } else {
-        localidadSelect.innerHTML = '<option id="optionTitle">Elige Localidad</option>';
-        localidades.forEach((localidad) => {
-            localidadSelect.innerHTML += `<option value=${localidad.name.id}>${localidad.name._}</option>`;
+        let options = '';
+        localidades.forEach(async (localidad) => {
+            options += `<option value=${localidad.name.id}>${localidad.name._}</option>`;
         });
+        localidadSelect.innerHTML = `<option id="optionTitle">Elige Localidad</option>${options}`;
     }
 };
 
@@ -168,6 +167,7 @@ const getPronosticos = async (e) => {
     });
 
     // Mostramos Widget usando Handlebars Partial
+    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['weatherWidget.hbs'];
     if (document.querySelector('#widget')) {
         document.querySelector('#widget').innerHTML = template({ weatherToday, weatherWeek });
@@ -203,6 +203,7 @@ const muestraCiudades = async (e) => {
                 });
             }
         });
+        // eslint-disable-next-line no-undef
         const template = Handlebars.templates['ciudadesSelect.hbs'];
         document.querySelector('#resultadoCiudades').innerHTML = template({ ciudadesEncontradas });
         document.getElementById('ciudadUl').addEventListener('click', (item) => {
