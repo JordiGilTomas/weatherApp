@@ -10,7 +10,6 @@ const { dir } = util;
 
 console.log(dir);
 
-
 const app = express();
 
 console.log(process.platform);
@@ -35,4 +34,8 @@ app.use(morgan('common'));
 
 app.use('/', router);
 
-app.listen(app.get('port'), () => console.log(`Servidor arrancado en puerto ${app.get('port')}`));
+app.on('error', () => { console.log('Error'); });
+
+
+const server = app.listen(app.get('port'), () => console.log(`Servidor arrancado en puerto ${app.get('port')}`));
+server.on('error', () => app.listen(3002, () => console.log('Iniciado en 3002')));

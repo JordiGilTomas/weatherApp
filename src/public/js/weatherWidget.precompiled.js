@@ -51,11 +51,11 @@ templates['weatherWidget.hbs'] = template({"1":function(container,depth0,helpers
   return "<section class=\"weather\">\r\n    <div class=\"today-weather\">\r\n        <p class=\"today-weather-city block\">El Tiempo en <span>"
     + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"city") : stack1), depth0))
     + "</span></p>\r\n        <div class=\"today-weahter-time\">\r\n                 <p class=\"time bold500\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"horaActual") : stack1), depth0))
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"hora") : stack1), depth0))
     + ":"
-    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"minutosActualTwoDigits") : stack1), depth0))
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"minutos") : stack1), depth0))
     + " "
-    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"estadoHoraActual") : stack1), depth0))
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"estadoActual") : stack1), depth0))
     + "</p>\r\n                 <span class=\"icons\">\r\n                 <i id=\"heart\" class=\"icon-heart-unselected\"></i>\r\n                 <i id=\"share\" class=\"icon-share\">\r\n                    <div class=\"socialIcons\">\r\n                        <i id=\"facebook\" class=\"icon-social-facebook\"></i>\r\n                        <i id=\"twitter\" class=\"icon-social-twitter\"></i>\r\n                        <i id=\"linkedin\" class=\"icon-social-linkedin\"></i>\r\n                        <i id=\"pinterest\" class=\"icon-social-pinterest\"></i>\r\n                        <i id=\"mail\" class=\"icon-social-mail\"></i>\r\n                        <i id=\"tumblr\" class=\"icon-social-tumblr\"></i>\r\n                        <i id=\"xing\" class=\"icon-social-xing\"></i>\r\n                        <i id=\"print\" class=\"icon-social-print\"></i>\r\n                    </div>\r\n                 </i>\r\n\r\n                 </span>\r\n        </div>\r\n\r\n\r\n        <div class=\"container-today\">\r\n        <img src=\"icons/tiempo/"
     + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"indexIconoHoraActual") : stack1), depth0))
     + ".svg\" alt=\"\" class=\"todayWeatherIcon\">\r\n        <div class=\"today-weather-container-temperatura\">\r\n            <p class=\"today-weather-temperatura block\">"

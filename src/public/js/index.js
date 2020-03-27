@@ -42,13 +42,13 @@ const getProvincias = async (e) => {
 const getLocalidades = async (e) => {
     if (provinciaSelect.querySelector('#optionTitle')) provinciaSelect.removeChild(provinciaSelect.options[0]);
     const idProvincia = e.target.value;
-    localidadSelect.innerHTML = '<option id="loading" value="0">Loading data...</option>';
+    localidadSelect.innerHTML = '<option>Loading data...</option>';
     const localidades = [...await (await fetch(`${url}getLocalidades/${idProvincia}`)).json()];
     if (localidades[0].error) {
         localidadSelect.innerHTML = '<option id="optionTitle">Datos no disponibles</option>';
     } else {
         let options = '';
-        localidades.forEach(async (localidad) => {
+        localidades.forEach((localidad) => {
             options += `<option value=${localidad.name.id}>${localidad.name._}</option>`;
         });
         localidadSelect.innerHTML = `<option id="optionTitle">Elige Localidad</option>${options}`;
@@ -76,14 +76,14 @@ const getPronosticos = async (e) => {
     const cincoDiasUnaHora = [...await (await fetch(`${url}getPronostico/CincoDiasUnaHora/${idLocalidad}`)).json()];
     const sieteDias = [...await (await fetch(`${url}getPronostico/SieteDias/${idLocalidad}`)).json()];
 
+    const hora = Number(cincoDiasUnaHora[0].local_info.local_time.split(':')[0]);
+    const minutos = Number(cincoDiasUnaHora[0].local_info.local_time.split(':')[1]);
     const city = cincoDiasTresHoras[0].city.split('[')[0];
-    const horaActual = new Date().getHours();
-    const minutosActualTwoDigits = `0${new Date().getMinutes().toString()}`.slice(-2);
-    const estadoHoraActual = cincoDiasUnaHora[0].hour[horaActual].symbol.desc2;
+    const estadoActual = cincoDiasUnaHora[0].hour[hora].symbol.desc2;
     const indexIconoHoraActual = cincoDiasUnaHora[0].symbol.value2;
-    const temperaturaActual = cincoDiasUnaHora[0].hour[horaActual].temp.value;
-    const sensacionTermica = cincoDiasUnaHora[0].hour[horaActual].windchill.value;
-    const rainCantidad = cincoDiasUnaHora[0].hour[horaActual].rain.value;
+    const temperaturaActual = cincoDiasUnaHora[0].hour[hora].temp.value;
+    const sensacionTermica = cincoDiasUnaHora[0].hour[hora].windchill.value;
+    const rainCantidad = cincoDiasUnaHora[0].hour[hora].rain.value;
     const estadoMayorParteDelDia = encuentraEstadoMasRepetido(cincoDiasUnaHora[0].hour);
     const iconoLuna = cincoDiasUnaHora[0].moon.symbol;
     const luna = cincoDiasUnaHora[0].moon.desc;
@@ -92,9 +92,9 @@ const getPronosticos = async (e) => {
 
     const weatherToday = {
         city,
-        horaActual,
-        minutosActualTwoDigits,
-        estadoHoraActual,
+        hora,
+        minutos,
+        estadoActual,
         indexIconoHoraActual,
         temperaturaActual,
         sensacionTermica,
