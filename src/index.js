@@ -22,7 +22,7 @@ app.engine('hbs', hbs({
 app.set('dirname', dir);
 app.set('view engine', 'hbs');
 app.set('views', join(dir, 'src/views'));
-app.set('port', process.env.PORT || 4000);
+app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(join(dir, 'src/public')));
 
@@ -34,8 +34,4 @@ app.use(morgan('common'));
 
 app.use('/', router);
 
-app.on('error', () => { console.log('Error'); });
-
-
-const server = app.listen(app.get('port'), () => console.log(`Servidor arrancado en puerto ${app.get('port')}`));
-server.on('error', () => app.listen(3002, () => console.log('Iniciado en 3002')));
+app.listen(app.get('port'), () => console.log(`Servidor arrancado en puerto ${app.get('port')}`));

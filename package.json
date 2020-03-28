@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --experimental-modules src/index.js"
+    "start": "node --experimental-modules src/index.js",
+    "ui": "browser-sync start --proxy=localhost:8000 --files='**/*.css, **/*.js' --ignore=node_modules --reload-delay 10 --no-ui --no-notify--reload-delay 10",
+    "dev": "start npm run ui && start nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-google": "^0.14.0",

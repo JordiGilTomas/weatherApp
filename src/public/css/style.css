@@ -11,8 +11,8 @@
     font-size: 0.6rem;
 }
 body {
-    height: 100vh;
-    width: 1024px;
+    width: 100%;
+    min-width: 815px;
     margin: auto;
 }
 
@@ -24,9 +24,8 @@ header {
 .selection{
     display: flex;
     justify-content: space-evenly;
-    margin: 2em auto 0 auto;
     background-color: rgba(76, 0, 130, 0.24);
-    width: 815px;
+    padding: 1em 3em 0em 3em;
 }
 .selection select {
     width: 25%;
@@ -35,9 +34,7 @@ header {
 
 .inputCiudad {
     box-sizing: border-box;
-    margin: 0 auto;
     background-color: rgba(76, 0, 130, 0.24);
-    width: 815px;
     padding: 1em;
     display: flex;
     justify-content: center;
@@ -118,18 +115,11 @@ li:hover {
     flex-wrap: wrap;
     align-content: flex-start;
     color: black;
-    height: 100vh;
-    max-width: 1024px;
-    /* min-width: 1024px; */
-    margin: 0 auto;
-
 }
 .today-weather {
     display: grid;
-    width: 100%;
-    margin: 0em 10%;
     background-color: cornsilk;
-    padding: 1em 3em;
+    padding: 1em 3em 0em 3em;
     z-index: 0;
 }
 
@@ -207,7 +197,7 @@ li:hover {
 
 .container-today {
     display: grid;
-    grid-template-columns: 1fr minmax(165px, 2fr) minmax(200px, 3fr) minmax(220px, 4fr) 1fr;
+    grid-template-columns: 1fr minmax(165px, 2fr) minmax(200px, 3fr) minmax(225px, 4fr) 1fr;
     grid-template-rows: 1fr;
     align-items: center;
     margin: 1em 0;
@@ -332,12 +322,10 @@ li:hover {
 
 .week-weather {
     display: grid;
-    grid-template-columns: 1fr repeat(6, 1fr);
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     background-color: midnightblue;
     font-size: 0.7rem;
-    margin: 0 10%;
-
+    width: 100%;
 }
 .week-weather div:first-child {
     flex: 1;
@@ -345,6 +333,30 @@ li:hover {
     color: white;
     background-color: purple;
     padding: 1em 0;
+
+
+}
+
+.week-weather div {
+    position: relative;
+}
+
+.week-weather div:first-child::before {
+    content: '';
+    background-color: transparent;
+    top: 72%;
+    left: 50%;
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    z-index: -10;
+    border-style: solid;
+    border-width: 25px;
+    border-color: transparent purple purple transparent;
+    transform: rotate(45deg);
+    transform-origin: 0 0;
+
+
 }
 
 .bottom05 {
