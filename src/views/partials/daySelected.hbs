@@ -1,0 +1,33 @@
+<h2 class="week-daySelected-hours-title">El tiempo en {{hour.0.city}} {{hour.0.nombreDia}} {{fecha}}</h2>
+{{#each hour}}
+ <div class="week-daySelected-hours-hour">
+            <div class="week-daySelected-hours-hour-time">
+                <span>{{time}}</span>
+                <img src="icons/tiempo/{{iconoTime}}.svg" alt="" class="todayWeatherIcon">
+            </div>
+            <div class="week-daySelected-hours-temp">
+                <p>{{temp}}°</p>
+            </div>
+             <div class="week-daySelected-hours-desc">
+                <p>{{descTemp}}</p>
+                <p>Sensación T. {{sensacionTermica}}°</p>
+            </div>
+            <div class="week-daySelected-hours-vientoUV">
+                <img src="icons/viento/{{iconoViento}}.png" alt="" class="todayWeatherIcon">
+                <div class="week-daySelected-hours-vientoUV-desc">
+                    <p>{{vientoDireccion}}</p>
+                    <p>{{vientoKmh}} - {{vientoRachas}} km/h</p>
+                </div>
+            </div>
+            <div class="week-daySelected-hours-vientoUV">
+                <i class="icon-sun"></i>
+                <div class="week-daySelected-hours-vientoUV-desc">
+                    <p>{{uv}} {{nivel}}</p>
+                    <p>FPS: {{fpsMin}} - {{fpsMax}}</p>
+                </div>
+            </div>
+            <div class="week-daySelected-hours-more">
+                <span id={{hour}}>+</span>
+            </div>
+</div>
+{{/each}}

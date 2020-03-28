@@ -66,6 +66,75 @@ const encuentraEstadoMasRepetido = (pronosticoPorHoras) => {
     return estados.find((estado) => estado.cantidad === maxCantidad).symbol.desc2;
 };
 
+const getLocalTime = (offset) => {
+    const horaActual = new Date();
+    const utcHora = horaActual.getUTCHours();
+    const minutos = horaActual.getUTCMinutes();
+    horaActual.setHours(utcHora + offset);
+    const horaLocal = horaActual.getHours();
+    return { horaLocal, minutos };
+};
+
+const getWindDirectionName = (direccionViento) => {
+    const nombres = {
+        N: 'Norte',
+        NE: 'Noreste',
+        E: 'Este',
+        SE: 'Sureste',
+        S: 'Sur',
+        SW: 'Suroeste',
+        W: 'Oeste',
+        NW: 'Noroeste',
+    };
+    return nombres[direccionViento];
+};
+
+const getNivelUv = (fps) => {
+    if (fps < 2) return 'Bajo';
+    if (fps < 6) return 'Moderado';
+    if (fps < 8) return 'Alto';
+    if (fps < 11) return 'Muy alto';
+    return 'Extremo';
+};
+
+const getMinFps = (nivel) => {
+    if (nivel === 'Bajo') return 8;
+    if (nivel === 'Moderado') return 15;
+    if (nivel === 'Alto') return 25;
+    if (nivel === 'Muy alto') return 30;
+    return '50+';
+};
+
+const getMaxFps = (nivel) => {
+    if (nivel === 'Bajo') return 15;
+    if (nivel === 'Moderado') return 25;
+    if (nivel === 'Alto') return 30;
+    if (nivel === 'Muy alto') return '50+';
+    return '50+';
+};
+
+const getTiempoSinProteccion = (nivel) => {
+    if (nivel === 'Bajo') return '80 - 110';
+    if (nivel === 'Moderado') return '40 - 60';
+    if (nivel === 'Alto') return '25 - 35';
+    if (nivel === 'Muy alto') return '20 - 30';
+    return '15 - 25';
+};
+
+const getFecha = (index) => {
+    let fecha = new Date();
+    console.log(index < 2);
+
+    fecha.setDate(new Date().getDate() + index);
+    fecha = fecha.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+
+    if (index < 2) {
+        fecha = (index === 0) ? `hoy,${fecha.split(',')[1]}` : `mañana,${fecha.split(',')[1]}`;
+        return fecha;
+    }
+
+    return fecha;
+};
 
 const getPronosticos = async (e) => {
     if (localidadSelect.querySelector('#optionTitle')) localidadSelect.removeChild(localidadSelect.options[0]);
@@ -76,14 +145,14 @@ const getPronosticos = async (e) => {
     const cincoDiasUnaHora = [...await (await fetch(`${url}getPronostico/CincoDiasUnaHora/${idLocalidad}`)).json()];
     const sieteDias = [...await (await fetch(`${url}getPronostico/SieteDias/${idLocalidad}`)).json()];
 
-    const hora = Number(cincoDiasUnaHora[0].local_info.local_time.split(':')[0]);
-    const minutos = Number(cincoDiasUnaHora[0].local_info.local_time.split(':')[1]);
+    const offset = Number(cincoDiasUnaHora[0].local_info.offset);
+    const { horaLocal, minutos } = getLocalTime(offset);
     const city = cincoDiasTresHoras[0].city.split('[')[0];
-    const estadoActual = cincoDiasUnaHora[0].hour[hora].symbol.desc2;
+    const estadoActual = cincoDiasUnaHora[0].hour[horaLocal].symbol.desc2;
     const indexIconoHoraActual = cincoDiasUnaHora[0].symbol.value2;
-    const temperaturaActual = cincoDiasUnaHora[0].hour[hora].temp.value;
-    const sensacionTermica = cincoDiasUnaHora[0].hour[hora].windchill.value;
-    const rainCantidad = cincoDiasUnaHora[0].hour[hora].rain.value;
+    const temperaturaActual = cincoDiasUnaHora[0].hour[horaLocal].temp.value;
+    const sensacionTermica = cincoDiasUnaHora[0].hour[horaLocal].windchill.value;
+    const rainCantidad = cincoDiasUnaHora[0].hour[horaLocal].rain.value;
     const estadoMayorParteDelDia = encuentraEstadoMasRepetido(cincoDiasUnaHora[0].hour);
     const iconoLuna = cincoDiasUnaHora[0].moon.symbol;
     const luna = cincoDiasUnaHora[0].moon.desc;
@@ -92,7 +161,7 @@ const getPronosticos = async (e) => {
 
     const weatherToday = {
         city,
-        hora,
+        horaLocal,
         minutos,
         estadoActual,
         indexIconoHoraActual,
@@ -170,7 +239,7 @@ const getPronosticos = async (e) => {
 
     // Mostramos Widget usando Handlebars Partial
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['weatherWidget.hbs'];
+    let template = Handlebars.templates['weatherWidget.hbs'];
     if (document.querySelector('#widget')) {
         document.querySelector('#widget').innerHTML = template({ weatherToday, weatherWeek });
     } else {
@@ -192,7 +261,7 @@ const getPronosticos = async (e) => {
     weekDayDivContainer.addEventListener('click', (event) => {
         // Si el elemento que se hace click ya es el selecionado
         // hacemos return y ya no hacemos nada.
-        // Con closest div que lo que hacemos es buscar el elemento padre
+        // Con closest div lo que hacemos es buscar el elemento padre
         // ya que hemos delegado el evento.
         if (event.target.closest('div').classList.contains('selected')) return;
 
@@ -200,11 +269,41 @@ const getPronosticos = async (e) => {
         // y le quitamos la clase Selected para deseleccionarlo.
         // Usamos Spread para convertirlo en Array para poder usar el método find.
 
-        [...weekDayDivContainer.querySelectorAll('div')].find((day) => day.classList.contains('selected')).classList.remove('selected');
+        const oldSelected = [...weekDayDivContainer.querySelectorAll('div')].find((day) => day.classList.contains('selected'));
+        oldSelected.classList.remove('selected');
 
-        // Añadimos la clase Selected al elemento que hemos hecho click
+        // Añadimos la clase Selected al elemento padre del que hemos hecho click
         event.target.closest('div').classList.add('selected');
     });
+
+    const daySelected = document.getElementById('week-daySelected-hours');
+    const hoursDaySelected = [];
+
+    cincoDiasUnaHora[0].hour.forEach((eachHora, index) => {
+        const hour = Number(eachHora.value.split(':')[0]);
+            hoursDaySelected.push({
+                city,
+                nombreDia: getFecha(index),
+                time: `0${hour}:00`.slice(-5),
+                iconoTime: eachHora.symbol.value2,
+                temp: eachHora.temp.value,
+                descTemp: eachHora.symbol.desc2,
+                sensacionTermica: eachHora.windchill.value,
+                iconoViento: eachHora.wind.symbolB,
+                vientoDireccion: getWindDirectionName(eachHora.wind.dir),
+                vientoKmh: eachHora.wind.value,
+                vientoRachas: eachHora['wind-gusts'].value,
+                uv: eachHora.uv_index.value,
+                nivel: getNivelUv(eachHora.uv_index.value),
+                fpsMin: getMinFps(getNivelUv(eachHora.uv_index.value)),
+                fpsMax: getMaxFps(getNivelUv(eachHora.uv_index.value)),
+            });
+    });
+
+    template = Handlebars.templates['daySelected.hbs'];
+    daySelected.innerHTML = template({ hour: hoursDaySelected });
+
+    console.log(hoursDaySelected);
 };
 
 const muestraCiudades = async (e) => {
@@ -230,7 +329,9 @@ const muestraCiudades = async (e) => {
             const idCiudad = {
                 target: { value: 0 },
             };
-            idCiudad.target.value = (item.target.tagName === 'LI') ? item.target.value : item.composedPath().filter((i) => i.tagName === 'LI')[0].value;
+            idCiudad.target.value = (item.target.tagName === 'LI')
+                ? item.target.value
+                : item.composedPath().filter((i) => i.tagName === 'LI')[0].value;
             getPronosticos(idCiudad);
             document.getElementById('resultadoCiudades').innerHTML = '';
             ciudadInput.value = '';

@@ -2,7 +2,7 @@
     <div class="today-weather">
         <p class="today-weather-city block">El Tiempo en <span>{{weatherToday.city}}</span></p>
         <div class="today-weahter-time">
-                 <p class="time bold500">{{weatherToday.hora}}:{{weatherToday.minutos}} {{weatherToday.estadoActual}}</p>
+                 <p class="time bold500">{{weatherToday.horaLocal}}:{{weatherToday.minutos}} {{weatherToday.estadoActual}}</p>
                  <span class="icons">
                  <i id="heart" class="icon-heart-unselected"></i>
                  <i id="share" class="icon-share">
@@ -73,12 +73,17 @@
             {{/if}}
         </p>
 
-        <p class="week-today-rangoTemperatura bold">{{temperaturaMaxima}}° / {{temperaturaMinima}}°</p>
+        <p class="week-weather-rangoTemperatura bold">{{temperaturaMaxima}}° / {{temperaturaMinima}}°</p>
         <img src="icons/viento/{{vientoIcono}}.png" alt="" class="weekWindIcon">
         <p>{{vientoKmh}}-{{vientoRachas}}</p>
         <p>km/h</p>
     </div>
      {{/each}}
+</aticle>
+
+<article id="week-daySelected-hours" class="week-daySelected-hours">
+
 </article>
+
 </section>
 

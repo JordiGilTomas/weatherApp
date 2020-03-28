@@ -43,14 +43,16 @@ header {
 }
 .inputCiudad input {
     width: 75%;
-    padding: 0.5em;
+    padding: 5px;
+    position: relative;
 }
 
 .resultadoCiudades{
     position: absolute;
-    top: 3em;
-    width: 74%;
+    top: 75%;
+    width: 73.8%;
     background-color: linen;
+    transform-origin: 0 0;
 }
 
 li {
@@ -118,6 +120,7 @@ li:hover {
     background-color: cornsilk;
     padding: 1em 3em 0em 3em;
     z-index: 0;
+    width: 100%;
 }
 
 .today-weather-city {
@@ -147,6 +150,7 @@ li:hover {
 
 .icons {
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     z-index: 100;
 }
 .icon-heart-selected {
@@ -321,12 +325,12 @@ li:hover {
     font-size: 0.7rem;
     width: 100%;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 .week-weather div:first-child {
     flex: 1;
     text-align: center;
     color: white;
-    /* background-color: purple; */
     padding: 1em 0;
 }
 
@@ -400,7 +404,84 @@ li:hover {
     height: 25px;
 }
 
-.week-today-rangoTemperatura {
+.week-weather-rangoTemperatura {
     padding: 0.5em 0;
     font-size: 1rem;
 }
+
+.week-daySelected-hours {
+    background-color: darkslategray;
+    padding-top: 2.5em;
+    color: darkgrey;
+    width: 100%;
+}
+
+.week-daySelected-hours-title {
+    margin-left: 1em;
+    margin-bottom: 1em;
+}
+
+.week-daySelected-hours-hour {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(10em, 3fr) minmax(1em, 5fr) minmax(1em, 4fr) minmax(1em, 4fr) minmax(1em, 1fr)); */
+    /* grid-template-columns: minmax(10em, 3fr) minmax(1em, 5fr) minmax(1em, 4fr) minmax(1em, 4fr) minmax(1em, 1fr); */
+    grid-template-columns: minmax(11em, 3fr) 4em 4fr 4fr 4fr 1fr;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: 0.01rem solid gray;
+    padding: 1em 0 0.6em;
+    font-size: 1rem;
+}
+
+.week-daySelected-hours-hour-time {
+    margin-left: 3em;
+    margin-right: 1em;
+}
+
+.week-daySelected-hours .icon-sun {
+    display: flex;
+    font-size: 2rem;
+    color: yellow;
+}
+.week-daySelected-hours-hour-time span {
+    font-weight: 600;
+    margin-right: 0.5em;
+}
+
+.week-daySelected-hours-hour img {
+    height: 3em;
+    width: 3em;
+    vertical-align: middle;
+}
+
+.week-daySelected-hours-temp {
+    text-align: right;
+}
+
+.week-daySelected-hours-temp > p {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-right: 0.5em;
+}
+
+.week-daySelected-hours-desc > p:first-child {
+    font-weight: 600;
+}
+
+.week-daySelected-hours-vientoUV {
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+}
+
+.week-daySelected-hours-vientoUV img {
+    width: 2em;
+    height: 2em;
+    margin: auto 0;
+}
+
+.week-daySelected-hours-vientoUV-desc {
+    margin-left: 0.5em;
+}
+
+

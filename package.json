@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node --experimental-modules src/index.js",
-    "ui": "browser-sync start --proxy=localhost:8000 --files='**/*.css, **/*.js' --ignore=node_modules --reload-delay 10 --no-ui --no-notify--reload-delay 10 --no-ui --no-notify",
+    "ui": "browser-sync start --proxy=localhost:8000 --files='**/*.css, **/*.js' --ignore=node_modules --reload-delay 10 --no-ui --no-notify--reload-delay 10",
     "dev": "start npm run ui && start nodemon src/index.js"
   },
   "repository": {
