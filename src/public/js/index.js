@@ -158,6 +158,8 @@ const getPronosticos = async (e) => {
         weatherWeek[index].vientoRachas = dia['wind-gusts'].value;
     });
 
+    weatherWeek[0].selected = true;
+
     weatherWeek.forEach((dia, indexDia) => {
         // Añado fecha al objeto ya que no figura en el API
         const fecha = new Date();
@@ -184,6 +186,24 @@ const getPronosticos = async (e) => {
     const share = document.getElementById('share');
     share.addEventListener('click', () => {
         share.firstElementChild.classList.toggle('show');
+    });
+
+    const weekDayDivContainer = document.getElementById('week-weather');
+    weekDayDivContainer.addEventListener('click', (event) => {
+        // Si el elemento que se hace click ya es el selecionado
+        // hacemos return y ya no hacemos nada.
+        // Con closest div que lo que hacemos es buscar el elemento padre
+        // ya que hemos delegado el evento.
+        if (event.target.closest('div').classList.contains('selected')) return;
+
+        // Buscamos el div que está seleccionado
+        // y le quitamos la clase Selected para deseleccionarlo.
+        // Usamos Spread para convertirlo en Array para poder usar el método find.
+
+        [...weekDayDivContainer.querySelectorAll('div')].find((day) => day.classList.contains('selected')).classList.remove('selected');
+
+        // Añadimos la clase Selected al elemento que hemos hecho click
+        event.target.closest('div').classList.add('selected');
     });
 };
 

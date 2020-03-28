@@ -61,7 +61,6 @@ li {
     cursor: pointer;
     margin: 0em 0;
     padding: 0.5em 0;
-
 }
 
 li:hover {
@@ -74,7 +73,6 @@ li:hover {
     color:blue;
     justify-content: center;
     width: 2em;
-
 }
 
 .li-ciudad {
@@ -92,7 +90,6 @@ li:hover {
 }
 
 .li-ciudad-nombre {
-
     font-weight: 700;
 }
 
@@ -159,8 +156,6 @@ li:hover {
 .icon-share {
     position: relative;
 }
-
-
 
 .socialIcons {
     font-family: 'weatherappicons';
@@ -260,7 +255,6 @@ li:hover {
     height:  2em;
 }
 
-
 .today-weather-container-precipitaciones {
     display: flex;
     flex-wrap: wrap;
@@ -326,22 +320,29 @@ li:hover {
     background-color: midnightblue;
     font-size: 0.7rem;
     width: 100%;
+    cursor: pointer;
 }
 .week-weather div:first-child {
     flex: 1;
     text-align: center;
     color: white;
+    /* background-color: purple; */
+    padding: 1em 0;
+}
+
+.week-weather .selected {
+    flex: 1;
+    text-align: center;
+    color: white;
     background-color: purple;
     padding: 1em 0;
-
-
 }
 
 .week-weather div {
     position: relative;
 }
 
-.week-weather div:first-child::before {
+.week-weather div.selected::before {
     content: '';
     background-color: transparent;
     top: 72%;
@@ -349,13 +350,15 @@ li:hover {
     position: absolute;
     height: 25px;
     width: 25px;
-    z-index: -10;
     border-style: solid;
     border-width: 25px;
     border-color: transparent purple purple transparent;
     transform: rotate(45deg);
     transform-origin: 0 0;
+}
 
+.week-weather div:not(.selected):hover {
+    background-color: rgb(17, 17, 212)
 
 }
 
@@ -369,7 +372,6 @@ li:hover {
 .week-weather p:first-child{
     font-size: 0.8rem;
 }
-
 
 .weekWeatherIcon {
     width: 50px;
@@ -397,7 +399,6 @@ li:hover {
 .weekWindIcon {
     height: 25px;
 }
-
 
 .week-today-rangoTemperatura {
     padding: 0.5em 0;
