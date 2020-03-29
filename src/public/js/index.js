@@ -5,6 +5,13 @@ const localidadSelect = document.getElementById('localidades');
 const ciudadInput = document.getElementById('ciudadInput');
 const url = window.location.href;
 
+const isEuropa = async (pais) => {
+    const idEuropa = 1;
+    const paises = [...await (await fetch(`${url}getPaises/${idEuropa}`)).json()];
+    return (paises.some((p) => p.name._ === pais));
+};
+
+
 const getPaises = async (e) => {
     if (continenteSelect.querySelector('#optionTitle')) continenteSelect.removeChild(continenteSelect.options[0]);
     provinciaSelect.innerHTML = '';
@@ -66,12 +73,19 @@ const encuentraEstadoMasRepetido = (pronosticoPorHoras) => {
     return estados.find((estado) => estado.cantidad === maxCantidad).symbol.desc2;
 };
 
-const getLocalTime = (offset) => {
-    const horaActual = new Date();
-    const utcHora = horaActual.getUTCHours();
-    const minutos = horaActual.getUTCMinutes();
-    horaActual.setHours(utcHora + offset);
-    const horaLocal = horaActual.getHours();
+
+const getLocalTime = async (offset, pais) => {
+    const fecha = new Date();
+    let minutos = fecha.getUTCMinutes();
+    const utcHora = fecha.getUTCHours();
+    const madridHora = Number(fecha.toLocaleTimeString({ timeZone: 'Europe/Madrid' }).split(':')[0]);
+    const isEuropaSummerTime = (madridHora - utcHora === 2);
+    fecha.setHours(utcHora + ((await isEuropa(pais) && isEuropaSummerTime) ? offset + 1 : offset));
+    let horaLocal = fecha.getHours();
+
+    horaLocal = `0${horaLocal}`.slice(-2);
+    minutos = `0${minutos}`.slice(-2);
+
     return { horaLocal, minutos };
 };
 
@@ -123,17 +137,50 @@ const getTiempoSinProteccion = (nivel) => {
 
 const getFecha = (index) => {
     let fecha = new Date();
-    console.log(index < 2);
 
-    fecha.setDate(new Date().getDate() + index);
+    fecha.setDate(new Date().getDate() + Number(index));
     fecha = fecha.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
 
     if (index < 2) {
-        fecha = (index === 0) ? `hoy,${fecha.split(',')[1]}` : `mañana,${fecha.split(',')[1]}`;
+        fecha = (Number(index) === 0) ? `hoy,${fecha.split(',')[1]}` : `mañana,${fecha.split(',')[1]}`;
         return fecha;
     }
 
     return fecha;
+};
+
+const showDaySelected = (pronostico, dia, city, horaLocal) => {
+    const daySelected = document.getElementById('week-daySelected-hours');
+    const hoursDaySelected = [];
+
+    pronostico[dia].hour.forEach((eachHora) => {
+        const hour = Number(eachHora.value.split(':')[0]);
+        hoursDaySelected.push({
+            city,
+            nombreDia: getFecha(dia),
+            time: `0${hour}:00`.slice(-5),
+            iconoTime: eachHora.symbol.value2,
+            temp: eachHora.temp.value,
+            descTemp: eachHora.symbol.desc2,
+            sensacionTermica: eachHora.windchill.value,
+            iconoViento: eachHora.wind.symbolB,
+            vientoDireccion: getWindDirectionName(eachHora.wind.dir),
+            vientoKmh: eachHora.wind.value,
+            vientoRachas: eachHora['wind-gusts'].value,
+            uv: eachHora.uv_index.value,
+            nivel: getNivelUv(eachHora.uv_index.value),
+            fpsMin: getMinFps(getNivelUv(eachHora.uv_index.value)),
+            fpsMax: getMaxFps(getNivelUv(eachHora.uv_index.value)),
+        });
+    });
+
+    const horasRestantes = (Number(dia) === 0)
+        ? hoursDaySelected.filter((hora) => Number(hora.time.split(':')[0]) >= Number(horaLocal))
+        : hoursDaySelected;
+
+    // eslint-disable-next-line no-undef
+    const template = Handlebars.templates['daySelected.hbs'];
+    daySelected.innerHTML = template({ hour: horasRestantes });
 };
 
 const getPronosticos = async (e) => {
@@ -145,14 +192,15 @@ const getPronosticos = async (e) => {
     const cincoDiasUnaHora = [...await (await fetch(`${url}getPronostico/CincoDiasUnaHora/${idLocalidad}`)).json()];
     const sieteDias = [...await (await fetch(`${url}getPronostico/SieteDias/${idLocalidad}`)).json()];
 
-    const offset = Number(cincoDiasUnaHora[0].local_info.offset);
-    const { horaLocal, minutos } = getLocalTime(offset);
     const city = cincoDiasTresHoras[0].city.split('[')[0];
-    const estadoActual = cincoDiasUnaHora[0].hour[horaLocal].symbol.desc2;
+    const pais = cincoDiasTresHoras[0].city.split(';')[1].slice(0, -1);
+    const offset = Number(cincoDiasUnaHora[0].local_info.offset);
+    const { horaLocal, minutos } = await getLocalTime(offset, pais);
+    const estadoActual = cincoDiasUnaHora[0].hour[Number(horaLocal)].symbol.desc2;
     const indexIconoHoraActual = cincoDiasUnaHora[0].symbol.value2;
-    const temperaturaActual = cincoDiasUnaHora[0].hour[horaLocal].temp.value;
-    const sensacionTermica = cincoDiasUnaHora[0].hour[horaLocal].windchill.value;
-    const rainCantidad = cincoDiasUnaHora[0].hour[horaLocal].rain.value;
+    const temperaturaActual = cincoDiasUnaHora[0].hour[Number(horaLocal)].temp.value;
+    const sensacionTermica = cincoDiasUnaHora[0].hour[Number(horaLocal)].windchill.value;
+    const rainCantidad = cincoDiasUnaHora[0].hour[Number(horaLocal)].rain.value;
     const estadoMayorParteDelDia = encuentraEstadoMasRepetido(cincoDiasUnaHora[0].hour);
     const iconoLuna = cincoDiasUnaHora[0].moon.symbol;
     const luna = cincoDiasUnaHora[0].moon.desc;
@@ -263,7 +311,8 @@ const getPronosticos = async (e) => {
         // hacemos return y ya no hacemos nada.
         // Con closest div lo que hacemos es buscar el elemento padre
         // ya que hemos delegado el evento.
-        if (event.target.closest('div').classList.contains('selected')) return;
+        const divPadre = event.target.closest('div');
+        if ((divPadre.classList.contains('selected')) || (divPadre.id > 4)) return;
 
         // Buscamos el div que está seleccionado
         // y le quitamos la clase Selected para deseleccionarlo.
@@ -273,37 +322,12 @@ const getPronosticos = async (e) => {
         oldSelected.classList.remove('selected');
 
         // Añadimos la clase Selected al elemento padre del que hemos hecho click
-        event.target.closest('div').classList.add('selected');
+        divPadre.classList.add('selected');
+        const indexDia = divPadre.id;
+        showDaySelected(cincoDiasUnaHora, indexDia, city, horaLocal);
     });
 
-    const daySelected = document.getElementById('week-daySelected-hours');
-    const hoursDaySelected = [];
-
-    cincoDiasUnaHora[0].hour.forEach((eachHora, index) => {
-        const hour = Number(eachHora.value.split(':')[0]);
-            hoursDaySelected.push({
-                city,
-                nombreDia: getFecha(index),
-                time: `0${hour}:00`.slice(-5),
-                iconoTime: eachHora.symbol.value2,
-                temp: eachHora.temp.value,
-                descTemp: eachHora.symbol.desc2,
-                sensacionTermica: eachHora.windchill.value,
-                iconoViento: eachHora.wind.symbolB,
-                vientoDireccion: getWindDirectionName(eachHora.wind.dir),
-                vientoKmh: eachHora.wind.value,
-                vientoRachas: eachHora['wind-gusts'].value,
-                uv: eachHora.uv_index.value,
-                nivel: getNivelUv(eachHora.uv_index.value),
-                fpsMin: getMinFps(getNivelUv(eachHora.uv_index.value)),
-                fpsMax: getMaxFps(getNivelUv(eachHora.uv_index.value)),
-            });
-    });
-
-    template = Handlebars.templates['daySelected.hbs'];
-    daySelected.innerHTML = template({ hour: hoursDaySelected });
-
-    console.log(hoursDaySelected);
+    showDaySelected(cincoDiasUnaHora, 0, city, horaLocal);
 };
 
 const muestraCiudades = async (e) => {

@@ -327,6 +327,10 @@ li:hover {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 }
+
+.week-weather div:nth-child(6), .week-weather div:nth-child(7) {
+    cursor: auto;
+}
 .week-weather div:first-child {
     flex: 1;
     text-align: center;
@@ -361,9 +365,8 @@ li:hover {
     transform-origin: 0 0;
 }
 
-.week-weather div:not(.selected):hover {
+.week-weather div:not(.selected):not(:nth-child(6)):not(:nth-child(7)):hover {
     background-color: rgb(17, 17, 212)
-
 }
 
 .bottom05 {
