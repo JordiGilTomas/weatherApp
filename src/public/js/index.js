@@ -4,6 +4,20 @@ const provinciaSelect = document.getElementById('provincias');
 const localidadSelect = document.getElementById('localidades');
 const ciudadInput = document.getElementById('ciudadInput');
 const url = window.location.href;
+const isTouch = ('ontouchstart' in window) ? 'isTouch' : 'isNotTouch';
+
+const getAlturaNubes = (temp, rocio) => Math.max(0, 125 * (temp - rocio));
+
+const getPUntoRocio = (temp, humi) => {
+    const rocio = (temp - (14.55 + 0.114 * temp) * (1 - (0.01 * humi)) - (((2.5 + 0.007 * temp)
+        * (1 - (0.01 * humi))) ** 3) - (15.9 + 0.117 * temp) * ((1 - (0.01 * humi)) ** 14));
+    return Math.round(rocio);
+};
+
+const isFoggy = (temp, puntoRocio) => {
+    if (temp <= puntoRocio) return 'Si';
+    return 'No';
+};
 
 const isEuropa = async (pais) => {
     const idEuropa = 1;
@@ -103,35 +117,35 @@ const getWindDirectionName = (direccionViento) => {
     return nombres[direccionViento];
 };
 
-const getNivelUv = (fps) => {
-    if (fps < 2) return 'Bajo';
-    if (fps < 6) return 'Moderado';
-    if (fps < 8) return 'Alto';
-    if (fps < 11) return 'Muy alto';
+const getNivelUv = (uv) => {
+    if (uv < 2) return 'Bajo';
+    if (uv < 6) return 'Moderado';
+    if (uv < 8) return 'Alto';
+    if (uv < 11) return 'Muy alto';
     return 'Extremo';
 };
 
-const getMinFps = (nivel) => {
-    if (nivel === 'Bajo') return 8;
-    if (nivel === 'Moderado') return 15;
-    if (nivel === 'Alto') return 25;
-    if (nivel === 'Muy alto') return 30;
+const getMinFps = (uv) => {
+    if (uv < 2) return 8;
+    if (uv < 6) return 15;
+    if (uv < 8) return 25;
+    if (uv < 11) return 30;
     return '50+';
 };
 
-const getMaxFps = (nivel) => {
-    if (nivel === 'Bajo') return 15;
-    if (nivel === 'Moderado') return 25;
-    if (nivel === 'Alto') return 30;
-    if (nivel === 'Muy alto') return '50+';
+const getMaxFps = (uv) => {
+    if (uv < 2) return 15;
+    if (uv < 6) return 25;
+    if (uv < 8) return 30;
+    if (uv < 11) return '50+';
     return '50+';
 };
 
-const getTiempoSinProteccion = (nivel) => {
-    if (nivel === 'Bajo') return '80 - 110';
-    if (nivel === 'Moderado') return '40 - 60';
-    if (nivel === 'Alto') return '25 - 35';
-    if (nivel === 'Muy alto') return '20 - 30';
+const getTiempoSinProteccion = (uv) => {
+    if (uv < 2) return '80 - 110';
+    if (uv < 6) return '40 - 60';
+    if (uv < 8) return '25 - 35';
+    if (uv < 11) return '20 - 30';
     return '15 - 25';
 };
 
@@ -149,13 +163,20 @@ const getFecha = (index) => {
     return fecha;
 };
 
+const mostrarDetalleHora = (e) => {
+    if (e.target.tagName === 'INPUT') {
+        const hora = e.target.dataset.id;
+        const detalleDiv = document.getElementById(`detalleHora${hora}`);
+        detalleDiv.classList.toggle('detalleHora-selected');
+    }
+};
 const showDaySelected = (pronostico, dia, city, horaLocal) => {
     const daySelected = document.getElementById('week-daySelected-hours');
-    const hoursDaySelected = [];
-
-    pronostico[dia].hour.forEach((eachHora) => {
+    const hoursDaySelected = pronostico[dia].hour.map((eachHora, index) => {
         const hour = Number(eachHora.value.split(':')[0]);
-        hoursDaySelected.push({
+        return {
+            isTouch,
+            index,
             city,
             nombreDia: getFecha(dia),
             time: `0${hour}:00`.slice(-5),
@@ -169,9 +190,17 @@ const showDaySelected = (pronostico, dia, city, horaLocal) => {
             vientoRachas: eachHora['wind-gusts'].value,
             uv: eachHora.uv_index.value,
             nivel: getNivelUv(eachHora.uv_index.value),
-            fpsMin: getMinFps(getNivelUv(eachHora.uv_index.value)),
-            fpsMax: getMaxFps(getNivelUv(eachHora.uv_index.value)),
-        });
+            fpsMin: getMinFps(eachHora.uv_index.value),
+            fpsMax: getMaxFps(eachHora.uv_index.value),
+            tiempoSinProteccion: getTiempoSinProteccion(eachHora.uv_index.value),
+            humedad: eachHora.humidity.value,
+            nubosidad: eachHora.clouds.value,
+            presion: eachHora.pressure.value,
+            alturaNubes: getAlturaNubes(eachHora.temp.value, getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
+            puntoRocio: getPUntoRocio(eachHora.temp.value, eachHora.humidity.value),
+            niebla: isFoggy(eachHora.temp.value, getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
+            cuotaNieve: eachHora.snowline.value,
+        };
     });
 
     const horasRestantes = (Number(dia) === 0)
@@ -181,6 +210,7 @@ const showDaySelected = (pronostico, dia, city, horaLocal) => {
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['daySelected.hbs'];
     daySelected.innerHTML = template({ hour: horasRestantes });
+    daySelected.addEventListener('click', mostrarDetalleHora);
 };
 
 const getPronosticos = async (e) => {
@@ -287,13 +317,14 @@ const getPronosticos = async (e) => {
 
     // Mostramos Widget usando Handlebars Partial
     // eslint-disable-next-line no-undef
-    let template = Handlebars.templates['weatherWidget.hbs'];
+    const template = Handlebars.templates['weatherWidget.hbs'];
+
     if (document.querySelector('#widget')) {
-        document.querySelector('#widget').innerHTML = template({ weatherToday, weatherWeek });
+        document.querySelector('#widget').innerHTML = template({ weatherToday, weatherWeek, isTouch });
     } else {
         const widget = document.createElement('div');
         widget.id = 'widget';
-        widget.innerHTML = template({ weatherToday, weatherWeek });
+        widget.innerHTML = template({ weatherToday, weatherWeek, isTouch });
         document.body.appendChild(widget);
     }
     const heart = document.getElementById('heart');

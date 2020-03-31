@@ -1,33 +1,125 @@
 <h2 class="week-daySelected-hours-title">El tiempo en {{hour.0.city}} {{hour.0.nombreDia}} {{fecha}}</h2>
 {{#each hour}}
- <div class="week-daySelected-hours-hour">
-            <div class="week-daySelected-hours-hour-time">
-                <span>{{time}}</span>
-                <img src="icons/tiempo/{{iconoTime}}.svg" alt="" class="todayWeatherIcon">
-            </div>
-            <div class="week-daySelected-hours-temp">
-                <p>{{temp}}°</p>
-            </div>
-             <div class="week-daySelected-hours-desc">
-                <p>{{descTemp}}</p>
-                <p>Sensación T. {{sensacionTermica}}°</p>
-            </div>
-            <div class="week-daySelected-hours-vientoUV">
-                <img src="icons/viento/{{iconoViento}}.png" alt="" class="todayWeatherIcon">
-                <div class="week-daySelected-hours-vientoUV-desc">
-                    <p>{{vientoDireccion}}</p>
-                    <p>{{vientoKmh}} - {{vientoRachas}} km/h</p>
-                </div>
-            </div>
-            <div class="week-daySelected-hours-vientoUV">
-                <i class="icon-sun"></i>
-                <div class="week-daySelected-hours-vientoUV-desc">
-                    <p>{{uv}} {{nivel}}</p>
-                    <p>FPS: {{fpsMin}} - {{fpsMax}}</p>
-                </div>
-            </div>
-            <div class="week-daySelected-hours-more">
-                <span id={{hour}}>+</span>
-            </div>
+<div class="week-daySelected-hours-hour">
+    <div class="week-daySelected-hours-hour-time">
+        <span>{{time}}</span>
+        <img src="icons/tiempo/{{iconoTime}}.svg" alt="" class="todayWeatherIcon">
+    </div>
+    <div class="week-daySelected-hours-temp">
+        <p>{{temp}}°</p>
+    </div>
+    <div class="week-daySelected-hours-desc">
+        <p>{{descTemp}}</p>
+        <p>Sensación T. {{sensacionTermica}}°</p>
+    </div>
+    <div class="week-daySelected-hours-vientoUV">
+        <img src="icons/viento/{{iconoViento}}.png" alt="" class="todayWeatherIcon">
+        <div class="week-daySelected-hours-vientoUV-desc">
+            <p>{{vientoDireccion}}</p>
+            <p>{{vientoKmh}} - {{vientoRachas}} km/h</p>
+        </div>
+    </div>
+    <div class="week-daySelected-hours-vientoUV">
+        <i class="icon-sun"></i>
+        <div class="week-daySelected-hours-vientoUV-desc">
+            <p>{{uv}} {{nivel}}</p>
+            <p>FPS: {{fpsMin}} - {{fpsMax}}</p>
+        </div>
+    </div>
+    <div class="week-daySelected-hours-more">
+        <input type="checkbox" name="btnDetalle" class="week-daySelected-hours-more-checkbox" id="btnDetalle{{index}}"
+            data-id={{index}}>
+        <label class="week-daySelected-hours-more-label {{isTouch}}" for="btnDetalle{{index}}">+</label>
+    </div>
+</div>
+
+
+
+
+<div id="detalleHora{{index}}" class="detalleHora">
+
+
+
+<div class="detalleHora-col1">
+    <div class="detalleHora-col1-nombre">
+        <div class=""><span>Índice UV</span></div>
+        <div class="">
+            <span>Exp. máxima</span>
+        </div>
+        <div class=""><span>Humedad</span></div>
+        <div class=""><span>Nubosidad</span></div>
+        <div class=""><span>Viento - Medio</span></div>
+        <div class=""><span>Presión</span></div>
+    </div>
+    <div class="detalleHora-col1-datos">
+        <div class="">
+            <img src="icons/detalle/spf.svg" alt="">
+            <span>{{uv}} FPS: {{fpsMin}} - {{fpsMax}}</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/uv.svg" alt="">
+            <span>{{tiempoSinProteccion}} minutos</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/humidity.svg" alt="">
+            <span>{{humedad}}%</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/nubosidad.svg" alt="">
+            <span>{{nubosidad}}</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/wind.svg" alt="">
+            <span>{{vientoKmh}} km/h</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/presionazul.svg" alt="">
+            <span>{{presion}} mb</span>
+        </div>
+    </div>
+</div>
+
+<div class="detalleHora-col2">
+    <div class="detalleHora-col2-nombre">
+        <div class=""><span>Altura de las nubes</span></div>
+        <div class=""><span>Sensación Térmica</span>
+        </div>
+        <div class=""><span>Punto de rocío</span></div>
+        <div class=""><span>Niebla</span></div>
+        <div class=""><span>Viento - Rachas</span></div>
+        <div class=""><span>Cuota Nieve</span></div>
+    </div>
+    <div class="detalleHora-col2-datos">
+        <div class="">
+               <img src="icons/detalle/binoculars.svg" alt="">
+            <span>{{alturaNubes}} metros</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/sensaciontermica.svg" alt="">
+            <span>{{sensacionTermica}} °C</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/puntorocio.svg" alt="">
+            <span>{{puntoRocio}} °C </span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/niebla.svg" alt="">
+            <span>{{niebla}}</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/vientorachas.svg" alt="">
+            <span>{{vientoRachas}} km/h</span>
+        </div>
+        <div class="">
+               <img src="icons/detalle/snow.svg" alt="">
+            <span>{{cuotaNieve}} m</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
 </div>
 {{/each}}

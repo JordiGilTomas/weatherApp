@@ -59,10 +59,9 @@
         </div>
         <i class="copy">*Datos obtenidos de tiempo.com</i>
         </div>
-
 <aticle id="week-weather" class="week-weather">
     {{#each weatherWeek}}
-      <div id={{@key}} {{#if selected}} class="selected" {{/if}}>
+      <div id={{@key}} {{#if selected}} class="selected {{../isTouch}}" {{/if}} class="{{../isTouch}}">
         <p class="bold700">{{nombreDia}}</p>
         <p>{{diaAndMes}}</p>
         <img src="icons/tiempo/{{tiempoIcono}}.svg" alt="" class="weekWeatherIcon">

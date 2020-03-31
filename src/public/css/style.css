@@ -365,7 +365,7 @@ li:hover {
     transform-origin: 0 0;
 }
 
-.week-weather div:not(.selected):not(:nth-child(6)):not(:nth-child(7)):hover {
+.week-weather div:not(.selected):not(:nth-child(6)):not(:nth-child(7)):not(.isTouch):hover {
     background-color: rgb(17, 17, 212)
 }
 
@@ -444,7 +444,7 @@ li:hover {
 .week-daySelected-hours .icon-sun {
     display: flex;
     font-size: 2rem;
-    color: yellow;
+    color: #FDCB20;
 }
 .week-daySelected-hours-hour-time span {
     font-weight: 600;
@@ -486,5 +486,84 @@ li:hover {
 .week-daySelected-hours-vientoUV-desc {
     margin-left: 0.5em;
 }
+
+.week-daySelected-hours-more {
+    -webkit-tap-highlight-color: transparent;
+}
+.week-daySelected-hours-more-label {
+    border: 1px solid darkgray;
+    border-radius: 50%;
+    padding: 0 0.30em;
+    font-size: 1.5rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+.week-daySelected-hours-more-checkbox {
+    display: none;
+
+}
+
+.week-daySelected-hours-more-checkbox:not(:checked) ~ label:not(.isTouch):hover {
+    background-color: midnightblue;
+}
+
+.week-daySelected-hours-more-checkbox:checked ~ label{
+    background-color: purple;
+}
+
+.detalleHora {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    width: 100%;
+    height: 0;
+    margin: auto;
+    transition: height .7s ease-in-out;
+    background-color: mintcream;
+    color: black;
+    overflow: hidden;
+
+}
+
+.detalleHora-selected {
+    height: 20rem;
+}
+
+.detalleHora-col1, .detalleHora-col2 {
+    display: flex;
+    margin: auto;
+}
+
+
+.detalleHora-col1-datos, .detalleHora-col2-datos {
+    font-weight: 500;
+}
+
+
+.detalleHora-col1-datos div, .detalleHora-col2-datos div {
+    display: flex;
+    margin: 0 1em;
+}
+
+.detalleHora-col1-datos img, .detalleHora-col2-datos img {
+    height: 2em;
+    margin: auto 1em;
+}
+
+.detalleHora span {
+    line-height: 3rem;
+}
+
+.detalleHora i {
+    margin: auto 0;
+}
+
+
+
+
 
 
