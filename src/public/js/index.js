@@ -170,8 +170,16 @@ const mostrarDetalleHora = (e) => {
         detalleDiv.classList.toggle('detalleHora-selected');
     }
 };
+
+const isNoche = (hora, primeraLuz, ultimaLuz) => {
+    if (hora < Number(primeraLuz.split(':')[0]) || hora > Number(ultimaLuz.split(':')[0])) return true;
+    return false;
+};
+
 const showDaySelected = (pronostico, dia, city, horaLocal) => {
     const daySelected = document.getElementById('week-daySelected-hours');
+    const primeraLuz = pronostico[dia].sun.in;
+    const ultimaLuz = pronostico[dia].sun.out;
     const hoursDaySelected = pronostico[dia].hour.map((eachHora, index) => {
         const hour = Number(eachHora.value.split(':')[0]);
         return {
@@ -196,10 +204,13 @@ const showDaySelected = (pronostico, dia, city, horaLocal) => {
             humedad: eachHora.humidity.value,
             nubosidad: eachHora.clouds.value,
             presion: eachHora.pressure.value,
-            alturaNubes: getAlturaNubes(eachHora.temp.value, getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
+            alturaNubes: getAlturaNubes(eachHora.temp.value,
+                getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
             puntoRocio: getPUntoRocio(eachHora.temp.value, eachHora.humidity.value),
-            niebla: isFoggy(eachHora.temp.value, getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
+            niebla: isFoggy(eachHora.temp.value,
+                getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
             cuotaNieve: eachHora.snowline.value,
+            noche: isNoche(hour, primeraLuz, ultimaLuz),
         };
     });
 

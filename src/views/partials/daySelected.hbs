@@ -3,7 +3,7 @@
 <div class="week-daySelected-hours-hour">
     <div class="week-daySelected-hours-hour-time">
         <span>{{time}}</span>
-        <img src="icons/tiempo/{{iconoTime}}.svg" alt="" class="todayWeatherIcon">
+        <img src="icons/tiempo/{{#if noche}}noche/{{/if}}{{iconoTime}}.svg" alt="" class="todayWeatherIcon">
     </div>
     <div class="week-daySelected-hours-temp">
         <p>{{temp}}°</p>

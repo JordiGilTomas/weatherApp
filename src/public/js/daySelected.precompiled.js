@@ -1,7 +1,7 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['daySelected.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
         }
@@ -11,7 +11,8 @@ templates['daySelected.hbs'] = template({"1":function(container,depth0,helpers,p
   return "<div class=\"week-daySelected-hours-hour\">\r\n    <div class=\"week-daySelected-hours-hour-time\">\r\n        <span>"
     + alias4(((helper = (helper = lookupProperty(helpers,"time") || (depth0 != null ? lookupProperty(depth0,"time") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"time","hash":{},"data":data,"loc":{"start":{"line":5,"column":14},"end":{"line":5,"column":22}}}) : helper)))
     + "</span>\r\n        <img src=\"icons/tiempo/"
-    + alias4(((helper = (helper = lookupProperty(helpers,"iconoTime") || (depth0 != null ? lookupProperty(depth0,"iconoTime") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"iconoTime","hash":{},"data":data,"loc":{"start":{"line":6,"column":31},"end":{"line":6,"column":44}}}) : helper)))
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"noche") : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":6,"column":31},"end":{"line":6,"column":57}}})) != null ? stack1 : "")
+    + alias4(((helper = (helper = lookupProperty(helpers,"iconoTime") || (depth0 != null ? lookupProperty(depth0,"iconoTime") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"iconoTime","hash":{},"data":data,"loc":{"start":{"line":6,"column":57},"end":{"line":6,"column":70}}}) : helper)))
     + ".svg\" alt=\"\" class=\"todayWeatherIcon\">\r\n    </div>\r\n    <div class=\"week-daySelected-hours-temp\">\r\n        <p>"
     + alias4(((helper = (helper = lookupProperty(helpers,"temp") || (depth0 != null ? lookupProperty(depth0,"temp") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"temp","hash":{},"data":data,"loc":{"start":{"line":9,"column":11},"end":{"line":9,"column":19}}}) : helper)))
     + "°</p>\r\n    </div>\r\n    <div class=\"week-daySelected-hours-desc\">\r\n        <p>"
@@ -73,6 +74,8 @@ templates['daySelected.hbs'] = template({"1":function(container,depth0,helpers,p
     + " km/h</span>\r\n        </div>\r\n        <div class=\"\">\r\n               <img src=\"icons/detalle/snow.svg\" alt=\"\">\r\n            <span>"
     + alias4(((helper = (helper = lookupProperty(helpers,"cuotaNieve") || (depth0 != null ? lookupProperty(depth0,"cuotaNieve") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"cuotaNieve","hash":{},"data":data,"loc":{"start":{"line":115,"column":18},"end":{"line":115,"column":32}}}) : helper)))
     + " m</span>\r\n        </div>\r\n    </div>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n\r\n\r\n</div>\r\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    return "noche/";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
