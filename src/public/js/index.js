@@ -176,6 +176,56 @@ const isNoche = (hora, primeraLuz, ultimaLuz) => {
     return false;
 };
 
+const showGrafica = (hoursDaySelected) => {
+    const xLabels = hoursDaySelected.map((hour) => hour.time);
+    const yTemps = hoursDaySelected.map((hour) => hour.temp);
+    const yTermica = hoursDaySelected.map((hour) => hour.sensacionTermica);
+    const yHumedad = hoursDaySelected.map((hour) => hour.puntoRocio);
+
+    const ctx = document.getElementById('grafica').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xLabels,
+            datasets: [{
+                label: 'Temperatura',
+                data: yTemps,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                fill: false,
+            },
+            {
+                label: 'Sensación Térmica',
+                data: yTermica,
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1,
+                fill: false,
+            },
+            {
+                label: 'Punto de Rocío',
+                data: yHumedad,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false,
+            },
+        ],
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                }],
+            },
+            maintainAspectRatio: false,
+        },
+    });
+};
+
 const showDaySelected = (pronostico, dia, city, horaLocal) => {
     const daySelected = document.getElementById('week-daySelected-hours');
     const primeraLuz = pronostico[dia].sun.in;
@@ -222,6 +272,8 @@ const showDaySelected = (pronostico, dia, city, horaLocal) => {
     const template = Handlebars.templates['daySelected.hbs'];
     daySelected.innerHTML = template({ hour: horasRestantes });
     daySelected.addEventListener('click', mostrarDetalleHora);
+
+    showGrafica(hoursDaySelected);
 };
 
 const getPronosticos = async (e) => {
