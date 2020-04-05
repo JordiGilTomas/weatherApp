@@ -8,7 +8,7 @@ const isTouch = ('ontouchstart' in window) ? 'isTouch' : 'isNotTouch';
 
 const getAlturaNubes = (temp, rocio) => Math.max(0, 125 * (temp - rocio));
 
-const getPUntoRocio = (temp, humi) => {
+const getPuntoRocio = (temp, humi) => {
     const rocio = (temp - (14.55 + 0.114 * temp) * (1 - (0.01 * humi)) - (((2.5 + 0.007 * temp)
         * (1 - (0.01 * humi))) ** 3) - (15.9 + 0.117 * temp) * ((1 - (0.01 * humi)) ** 14));
     return Math.round(rocio);
@@ -89,12 +89,17 @@ const encuentraEstadoMasRepetido = (pronosticoPorHoras) => {
 
 
 const getLocalTime = async (offset, pais) => {
+    // Issue with API has been fixed. No need to calculate SummerTime anymore.
     const fecha = new Date();
     let minutos = fecha.getUTCMinutes();
     const utcHora = fecha.getUTCHours();
-    const madridHora = Number(fecha.toLocaleTimeString({ timeZone: 'Europe/Madrid' }).split(':')[0]);
-    const isEuropaSummerTime = (madridHora - utcHora === 2);
-    fecha.setHours(utcHora + ((await isEuropa(pais) && isEuropaSummerTime) ? offset + 1 : offset));
+    // const madridHora = Number(fecha.toLocaleTimeString(
+        // { timeZone: 'Europe/Madrid' }).split(':')[0]);
+    // const isEuropaSummerTime = (madridHora - utcHora === 2);
+    // fecha.setHours(utcHora + ((await isEuropa(pais) && isEuropaSummerTime)
+        // ? offset + 1
+        // : offset));
+    fecha.setHours(utcHora + offset);
     let horaLocal = fecha.getHours();
 
     horaLocal = `0${horaLocal}`.slice(-2);
@@ -182,6 +187,13 @@ const showGrafica = (hoursDaySelected) => {
     const yTermica = hoursDaySelected.map((hour) => hour.sensacionTermica);
     const yHumedad = hoursDaySelected.map((hour) => hour.puntoRocio);
 
+    // Para resetear el Canvas ya que al cargar nuevos datos
+    // muestra datos antiguos si no se resetea al hacer hover
+    // Destroy y clear no logro que funcionen bien en ChartJS
+    const graficas = document.getElementById('graficas');
+    graficas.innerHTML = '';
+    graficas.innerHTML = '<canvas id="grafica"></canvas';
+
     const ctx = document.getElementById('grafica').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -255,10 +267,10 @@ const showDaySelected = (pronostico, dia, city, horaLocal) => {
             nubosidad: eachHora.clouds.value,
             presion: eachHora.pressure.value,
             alturaNubes: getAlturaNubes(eachHora.temp.value,
-                getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
-            puntoRocio: getPUntoRocio(eachHora.temp.value, eachHora.humidity.value),
+                getPuntoRocio(eachHora.temp.value, eachHora.humidity.value)),
+            puntoRocio: getPuntoRocio(eachHora.temp.value, eachHora.humidity.value),
             niebla: isFoggy(eachHora.temp.value,
-                getPUntoRocio(eachHora.temp.value, eachHora.humidity.value)),
+                getPuntoRocio(eachHora.temp.value, eachHora.humidity.value)),
             cuotaNieve: eachHora.snowline.value,
             noche: isNoche(hour, primeraLuz, ultimaLuz),
         };
