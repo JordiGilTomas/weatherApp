@@ -191,7 +191,6 @@ const showGrafica = (hoursDaySelected) => {
     // muestra datos antiguos si no se resetea al hacer hover
     // Destroy y clear no logro que funcionen bien en ChartJS
     const graficas = document.getElementById('graficas');
-    graficas.innerHTML = '';
     graficas.innerHTML = '<canvas id="grafica"></canvas';
 
     const ctx = document.getElementById('grafica').getContext('2d');
@@ -230,10 +229,20 @@ const showGrafica = (hoursDaySelected) => {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
+                        callback(value) {
+                            return `${value} °C`;
+                        },
                     },
                 }],
             },
             maintainAspectRatio: false,
+            tooltips: {
+                callbacks: {
+                    label(tooltipItem, data) {
+                        return `${data.datasets[tooltipItem.datasetIndex].label}: ${tooltipItem.yLabel} °C`;
+                    },
+                },
+            },
         },
     });
 };
@@ -301,11 +310,11 @@ const getPronosticos = async (e) => {
     const pais = cincoDiasTresHoras[0].city.split(';')[1].slice(0, -1);
     const offset = Number(cincoDiasUnaHora[0].local_info.offset);
     const { horaLocal, minutos } = await getLocalTime(offset, pais);
-    const estadoActual = cincoDiasUnaHora[0].hour[Number(horaLocal)].symbol.desc2;
+    const estadoActual = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].symbol.desc2;
     const indexIconoHoraActual = cincoDiasUnaHora[0].symbol.value2;
-    const temperaturaActual = cincoDiasUnaHora[0].hour[Number(horaLocal)].temp.value;
-    const sensacionTermica = cincoDiasUnaHora[0].hour[Number(horaLocal)].windchill.value;
-    const rainCantidad = cincoDiasUnaHora[0].hour[Number(horaLocal)].rain.value;
+    const temperaturaActual = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].temp.value;
+    const sensacionTermica = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].windchill.value;
+    const rainCantidad = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].rain.value;
     const estadoMayorParteDelDia = encuentraEstadoMasRepetido(cincoDiasUnaHora[0].hour);
     const iconoLuna = cincoDiasUnaHora[0].moon.symbol;
     const luna = cincoDiasUnaHora[0].moon.desc;
