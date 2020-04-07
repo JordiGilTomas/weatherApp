@@ -94,11 +94,11 @@ const getLocalTime = async (offset, pais) => {
     let minutos = fecha.getUTCMinutes();
     const utcHora = fecha.getUTCHours();
     // const madridHora = Number(fecha.toLocaleTimeString(
-        // { timeZone: 'Europe/Madrid' }).split(':')[0]);
+    // { timeZone: 'Europe/Madrid' }).split(':')[0]);
     // const isEuropaSummerTime = (madridHora - utcHora === 2);
     // fecha.setHours(utcHora + ((await isEuropa(pais) && isEuropaSummerTime)
-        // ? offset + 1
-        // : offset));
+    // ? offset + 1
+    // : offset));
     fecha.setHours(utcHora + offset);
     let horaLocal = fecha.getHours();
 
@@ -181,6 +181,24 @@ const isNoche = (hora, primeraLuz, ultimaLuz) => {
     return false;
 };
 
+const getDuracionDia = (solSalida, solPuesta) => {
+    const duracionDia = new Date();
+    duracionDia.setUTCHours(
+        Number(solPuesta.split(':')[0]) - Number(solSalida.split(':')[0]),
+        Number(solPuesta.split(':')[1] - Number(solSalida.split(':')[1])),
+    );
+    return `${duracionDia.getUTCHours()}h ${duracionDia.getMinutes()}m`;
+};
+
+const getDuracionNoche = (lunaSalida, lunaPuesta) => {
+    const duracionNoche = new Date();
+    duracionNoche.setUTCHours(
+        Number(lunaSalida.split(':')[0]) - Number(lunaPuesta.split(':')[0]),
+        Number(lunaSalida.split(':')[1] - Number(lunaPuesta.split(':')[1])),
+    );
+    return `${duracionNoche.getUTCHours()}h ${duracionNoche.getMinutes()}m`;
+};
+
 const showGrafica = (hoursDaySelected) => {
     const xLabels = hoursDaySelected.map((hour) => hour.time);
     const yTemps = hoursDaySelected.map((hour) => hour.temp);
@@ -191,7 +209,7 @@ const showGrafica = (hoursDaySelected) => {
     // muestra datos antiguos si no se resetea al hacer hover
     // Destroy y clear no logro que funcionen bien en ChartJS
     const graficas = document.getElementById('graficas');
-    graficas.innerHTML = '<canvas id="grafica"></canvas';
+    graficas.innerHTML = '<canvas id="grafica"></canvas>';
 
     const ctx = document.getElementById('grafica').getContext('2d');
     const myChart = new Chart(ctx, {
@@ -222,18 +240,39 @@ const showGrafica = (hoursDaySelected) => {
                 borderWidth: 1,
                 fill: false,
             },
-        ],
+            ],
         },
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
+                        // fontColor: 'white',
                         beginAtZero: true,
                         callback(value) {
                             return `${value} °C`;
                         },
                     },
+                    // gridLines: {
+                    //     display: true,
+                    //     zeroLineColor: 'black',
+                    //     color: 'gray',
+                    // },
                 }],
+                xAxes: [{
+                    ticks: {
+                        // fontColor: 'white',
+                    },
+                    // gridLines: {
+                    //     display: true,
+                    //     zeroLineColor: 'black',
+                    //     color: 'gray',
+                    // },
+                }],
+            },
+            legend: {
+                labels: {
+                    // fontColor: 'white',
+                },
             },
             maintainAspectRatio: false,
             tooltips: {
@@ -320,6 +359,14 @@ const getPronosticos = async (e) => {
     const luna = cincoDiasUnaHora[0].moon.desc;
     const tipoLuna = luna.slice(0, luna.indexOf(','));
     const descripcionLuna = luna.slice(luna.indexOf(',') + 2);
+    const solSalida = cincoDiasTresHoras[0].day[0].sun.in;
+    const solMediodia = cincoDiasTresHoras[0].day[0].sun.mid;
+    const solPuesta = cincoDiasTresHoras[0].day[0].sun.out;
+    const lunaSalida = cincoDiasTresHoras[0].day[0].moon.in;
+    const lunaPuesta = cincoDiasTresHoras[0].day[0].moon.out;
+    const duracionDia = getDuracionDia(solSalida, solPuesta);
+    const duracionNoche = getDuracionNoche(lunaSalida, lunaPuesta);
+
 
     const weatherToday = {
         city,
@@ -334,6 +381,13 @@ const getPronosticos = async (e) => {
         tipoLuna,
         descripcionLuna,
         estadoMayorParteDelDia,
+        solSalida,
+        solMediodia,
+        solPuesta,
+        duracionDia,
+        lunaSalida,
+        lunaPuesta,
+        duracionNoche,
     };
 
     const weatherWeek = [];
@@ -426,6 +480,7 @@ const getPronosticos = async (e) => {
         // hacemos return y ya no hacemos nada.
         // Con closest div lo que hacemos es buscar el elemento padre
         // ya que hemos delegado el evento.
+        // Sólo hay datos por horas los 5 primeros días (0 a 4, >4 return)
         const divPadre = event.target.closest('div');
         if ((divPadre.classList.contains('selected')) || (divPadre.id > 4)) return;
 

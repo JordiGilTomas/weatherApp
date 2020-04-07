@@ -11,9 +11,13 @@
     font-size: 0.6rem;
 }
 body {
-    width: 100%;
+    height: 100vh;
     min-width: 815px;
     margin: auto;
+    background: url('../icons/background/sun.jpg');
+    /* background-attachment: fixed; */
+    background-size: cover !important;
+    /* background-color: red; */
 }
 
 header {
@@ -24,17 +28,18 @@ header {
 .selection{
     display: flex;
     justify-content: space-evenly;
-    background-color: rgba(76, 0, 130, 0.24);
-    padding: 1em 3em 0em 3em;
+    /* background-color: rgba(76, 0, 130, 0.24); */
+    /* padding: 1em 3em 0em 3em; */
 }
 .selection select {
     width: 25%;
     margin: 1em;
+    /* font-size: 0.4rem; */
 }
 
 .inputCiudad {
     box-sizing: border-box;
-    background-color: rgba(76, 0, 130, 0.24);
+    /* background-color: rgba(76, 0, 130, 0.24); */
     padding: 1em;
     display: flex;
     justify-content: center;
@@ -117,8 +122,8 @@ li:hover {
 }
 .today-weather {
     display: grid;
-    height: 15em;
-    background-color: cornsilk;
+    height: 18em;
+    /* background-color: cornsilk; */
     padding: 1em 3em 0em 3em;
     z-index: 0;
     width: 100%;
@@ -317,6 +322,29 @@ li:hover {
 .next .icon-arrow-right {
     font-size: 1.5rem;
     color: black;
+}
+
+.salidaPuesta {
+    display: flex;
+    flex-direction: column;
+    /* background-color: white; */
+}
+
+.salidaPuesta-sol, .salidaPuesta-luna {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.salidaPuesta-luna {
+    justify-content: space-evenly;
+}
+
+.salidaPuesta-sol{
+    padding: 0.5em 0;
+}
+.salidaPuesta-luna p {
+    padding-bottom: 0.5em;
 }
 
 .graficas {

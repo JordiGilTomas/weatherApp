@@ -9,29 +9,29 @@ templates['weatherWidget.hbs'] = template({"1":function(container,depth0,helpers
     };
 
   return "        <div id="
-    + alias4(((helper = (helper = lookupProperty(helpers,"key") || (data && lookupProperty(data,"key"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":73,"column":16},"end":{"line":73,"column":24}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"key") || (data && lookupProperty(data,"key"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":86,"column":16},"end":{"line":86,"column":24}}}) : helper)))
     + " "
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"selected") : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":73,"column":25},"end":{"line":73,"column":81}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"selected") : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":86,"column":25},"end":{"line":86,"column":81}}})) != null ? stack1 : "")
     + " class=\""
     + alias4(container.lambda((depths[1] != null ? lookupProperty(depths[1],"isTouch") : depths[1]), depth0))
     + "\">\r\n            <p class=\"bold700\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"nombreDia") || (depth0 != null ? lookupProperty(depth0,"nombreDia") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"nombreDia","hash":{},"data":data,"loc":{"start":{"line":74,"column":31},"end":{"line":74,"column":44}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"nombreDia") || (depth0 != null ? lookupProperty(depth0,"nombreDia") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"nombreDia","hash":{},"data":data,"loc":{"start":{"line":87,"column":31},"end":{"line":87,"column":44}}}) : helper)))
     + "</p>\r\n            <p>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"diaAndMes") || (depth0 != null ? lookupProperty(depth0,"diaAndMes") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"diaAndMes","hash":{},"data":data,"loc":{"start":{"line":75,"column":15},"end":{"line":75,"column":28}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"diaAndMes") || (depth0 != null ? lookupProperty(depth0,"diaAndMes") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"diaAndMes","hash":{},"data":data,"loc":{"start":{"line":88,"column":15},"end":{"line":88,"column":28}}}) : helper)))
     + "</p>\r\n            <img src=\"icons/tiempo/"
-    + alias4(((helper = (helper = lookupProperty(helpers,"tiempoIcono") || (depth0 != null ? lookupProperty(depth0,"tiempoIcono") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tiempoIcono","hash":{},"data":data,"loc":{"start":{"line":76,"column":35},"end":{"line":76,"column":50}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"tiempoIcono") || (depth0 != null ? lookupProperty(depth0,"tiempoIcono") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tiempoIcono","hash":{},"data":data,"loc":{"start":{"line":89,"column":35},"end":{"line":89,"column":50}}}) : helper)))
     + ".svg\" alt=\"\" class=\"weekWeatherIcon\">\r\n            <img class=\"week-weather-paraguas\" src=\"icons/lluvia/paraguas.png\" alt=\"\">\r\n            <p> "
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"lluvia") : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.program(6, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":78,"column":16},"end":{"line":81,"column":23}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"lluvia") : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.program(6, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":91,"column":16},"end":{"line":94,"column":23}}})) != null ? stack1 : "")
     + "            </p>\r\n\r\n            <p class=\"week-weather-rangoTemperatura bold\">"
-    + alias4(((helper = (helper = lookupProperty(helpers,"temperaturaMaxima") || (depth0 != null ? lookupProperty(depth0,"temperaturaMaxima") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"temperaturaMaxima","hash":{},"data":data,"loc":{"start":{"line":84,"column":58},"end":{"line":84,"column":79}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"temperaturaMaxima") || (depth0 != null ? lookupProperty(depth0,"temperaturaMaxima") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"temperaturaMaxima","hash":{},"data":data,"loc":{"start":{"line":97,"column":58},"end":{"line":97,"column":79}}}) : helper)))
     + "° / "
-    + alias4(((helper = (helper = lookupProperty(helpers,"temperaturaMinima") || (depth0 != null ? lookupProperty(depth0,"temperaturaMinima") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"temperaturaMinima","hash":{},"data":data,"loc":{"start":{"line":84,"column":83},"end":{"line":84,"column":104}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"temperaturaMinima") || (depth0 != null ? lookupProperty(depth0,"temperaturaMinima") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"temperaturaMinima","hash":{},"data":data,"loc":{"start":{"line":97,"column":83},"end":{"line":97,"column":104}}}) : helper)))
     + "°</p>\r\n            <img src=\"icons/viento/"
-    + alias4(((helper = (helper = lookupProperty(helpers,"vientoIcono") || (depth0 != null ? lookupProperty(depth0,"vientoIcono") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"vientoIcono","hash":{},"data":data,"loc":{"start":{"line":85,"column":35},"end":{"line":85,"column":50}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"vientoIcono") || (depth0 != null ? lookupProperty(depth0,"vientoIcono") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"vientoIcono","hash":{},"data":data,"loc":{"start":{"line":98,"column":35},"end":{"line":98,"column":50}}}) : helper)))
     + ".png\" alt=\"\" class=\"weekWindIcon\">\r\n            <p>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"vientoKmh") || (depth0 != null ? lookupProperty(depth0,"vientoKmh") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"vientoKmh","hash":{},"data":data,"loc":{"start":{"line":86,"column":15},"end":{"line":86,"column":28}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"vientoKmh") || (depth0 != null ? lookupProperty(depth0,"vientoKmh") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"vientoKmh","hash":{},"data":data,"loc":{"start":{"line":99,"column":15},"end":{"line":99,"column":28}}}) : helper)))
     + "-"
-    + alias4(((helper = (helper = lookupProperty(helpers,"vientoRachas") || (depth0 != null ? lookupProperty(depth0,"vientoRachas") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"vientoRachas","hash":{},"data":data,"loc":{"start":{"line":86,"column":29},"end":{"line":86,"column":45}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"vientoRachas") || (depth0 != null ? lookupProperty(depth0,"vientoRachas") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"vientoRachas","hash":{},"data":data,"loc":{"start":{"line":99,"column":29},"end":{"line":99,"column":45}}}) : helper)))
     + "</p>\r\n            <p>km/h</p>\r\n        </div>\r\n";
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -53,7 +53,7 @@ templates['weatherWidget.hbs'] = template({"1":function(container,depth0,helpers
     };
 
   return "\r\n                "
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"lluvia") || (depth0 != null ? lookupProperty(depth0,"lluvia") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"lluvia","hash":{},"data":data,"loc":{"start":{"line":79,"column":16},"end":{"line":79,"column":26}}}) : helper)))
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"lluvia") || (depth0 != null ? lookupProperty(depth0,"lluvia") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"lluvia","hash":{},"data":data,"loc":{"start":{"line":92,"column":16},"end":{"line":92,"column":26}}}) : helper)))
     + " mm\r\n                ";
 },"6":function(container,depth0,helpers,partials,data) {
     return " -\r\n";
@@ -89,8 +89,22 @@ templates['weatherWidget.hbs'] = template({"1":function(container,depth0,helpers
     + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"descripcionLuna") : stack1), depth0))
     + "</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"durante-container\">\r\n                <button class=\"btnDetalle\">i</button>\r\n                <div class=\"durante-container-mayorParte\">\r\n                    <p class=\"durante block bold subrayado\">La mayor parte del día</p>\r\n                    <p class=\"duranteblock \">"
     + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"estadoMayorParteDelDia") : stack1), depth0))
-    + "</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"next\">\r\n                <button class=\"btnNext\"><i class=\"icon-arrow-right\"></i></button>\r\n            </div>\r\n        </div>\r\n        <i class=\"copy\">*Datos obtenidos de tiempo.com</i>\r\n    </div>\r\n\r\n    <article id=\"graficas\" class=\"graficas\">\r\n        <canvas id=\"grafica\"></canvas>\r\n    </article>\r\n\r\n    <aticle id=\"week-weather\" class=\"week-weather\">\r\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"weatherWeek") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":72,"column":8},"end":{"line":89,"column":17}}})) != null ? stack1 : "")
+    + "</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"next\">\r\n                <button class=\"btnNext\"><i class=\"icon-arrow-right\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"salidaPuesta\">\r\n            <div class=\"salidaPuesta-sol\">\r\n                <p>Salida Sol: "
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"solSalida") : stack1), depth0))
+    + "</p>\r\n                <p>Mediodía: "
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"solMediodia") : stack1), depth0))
+    + "</p>\r\n                <p>Puesta Sol: "
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"solPuesta") : stack1), depth0))
+    + "</p>\r\n                <p>Duración Día: "
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"duracionDia") : stack1), depth0))
+    + "</p>\r\n            </div>\r\n            <div class=\"salidaPuesta-luna\">\r\n                <p>Salida Luna: "
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"lunaSalida") : stack1), depth0))
+    + "</p>\r\n                <p>Puesta Luna: "
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"lunaPuesta") : stack1), depth0))
+    + "</p>\r\n                <p>Duración Noche: "
+    + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"weatherToday") : depth0)) != null ? lookupProperty(stack1,"duracionNoche") : stack1), depth0))
+    + "</p>\r\n            </div>\r\n        </div>\r\n        <i class=\"copy\">*Datos obtenidos de tiempo.com</i>\r\n    </div>\r\n\r\n    <article id=\"graficas\" class=\"graficas\">\r\n        <canvas id=\"grafica\"></canvas>\r\n    </article>\r\n\r\n    <aticle id=\"week-weather\" class=\"week-weather\">\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"weatherWeek") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":85,"column":8},"end":{"line":102,"column":17}}})) != null ? stack1 : "")
     + "    </aticle>\r\n\r\n    <article id=\"week-daySelected-hours\" class=\"week-daySelected-hours\">\r\n\r\n    </article>\r\n\r\n</section>";
 },"useData":true,"useDepths":true});
 })();
