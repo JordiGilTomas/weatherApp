@@ -1,4 +1,4 @@
-<h2 class="week-daySelected-hours-title">El tiempo en {{hour.0.city}} {{hour.0.nombreDia}} {{fecha}}</h2>
+<h2 class="week-daySelected-hours-title"><span class="week-daySelected-hours-title-spanTitle">El tiempo en </span><span>{{hour.0.city}}</span> <span>{{hour.0.nombreDia}} {{fecha}}</span></h2>
 {{#each hour}}
 <div class="week-daySelected-hours-hour">
     <div class="week-daySelected-hours-hour-time">
@@ -23,7 +23,7 @@
         <i class="icon-sun"></i>
         <div class="week-daySelected-hours-vientoUV-desc">
             <p>{{uv}} {{nivel}}</p>
-            <p>FPS: {{fpsMin}} - {{fpsMax}}</p>
+            <p>FPS: {{fpsMin}} / {{fpsMax}}</p>
         </div>
     </div>
     <div class="week-daySelected-hours-more">

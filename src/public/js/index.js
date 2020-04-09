@@ -187,7 +187,7 @@ const getDuracionDia = (solSalida, solPuesta) => {
         Number(solPuesta.split(':')[0]) - Number(solSalida.split(':')[0]),
         Number(solPuesta.split(':')[1] - Number(solSalida.split(':')[1])),
     );
-    return `${duracionDia.getUTCHours()}h ${duracionDia.getMinutes()}m`;
+    return `${duracionDia.getUTCHours()}h ${(`0${duracionDia.getMinutes()}`).slice(-2)}m`;
 };
 
 const getDuracionNoche = (lunaSalida, lunaPuesta) => {
@@ -196,7 +196,7 @@ const getDuracionNoche = (lunaSalida, lunaPuesta) => {
         Number(lunaSalida.split(':')[0]) - Number(lunaPuesta.split(':')[0]),
         Number(lunaSalida.split(':')[1] - Number(lunaPuesta.split(':')[1])),
     );
-    return `${duracionNoche.getUTCHours()}h ${duracionNoche.getMinutes()}m`;
+    return `${duracionNoche.getUTCHours()}h ${(`0${duracionNoche.getMinutes()}`).slice(-2)}m`;
 };
 
 const showGrafica = (hoursDaySelected) => {
@@ -271,7 +271,7 @@ const showGrafica = (hoursDaySelected) => {
             },
             legend: {
                 labels: {
-                    // fontColor: 'white',
+                  // fontColor: 'white'
                 },
             },
             maintainAspectRatio: false,

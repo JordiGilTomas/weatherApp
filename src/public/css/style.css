@@ -12,12 +12,10 @@
 }
 body {
     height: 100vh;
-    min-width: 815px;
+    /* min-width: 815px; */
     margin: auto;
-    background: url('../icons/background/sun.jpg');
-    /* background-attachment: fixed; */
-    background-size: cover !important;
-    /* background-color: red; */
+    background: linear-gradient(to bottom,rgb(93, 132, 202),white, white) no-repeat;
+    overflow-x: hidden;
 }
 
 header {
@@ -26,8 +24,11 @@ header {
 }
 
 .selection{
+    box-sizing: border-box;
     display: flex;
     justify-content: space-evenly;
+    width: 94vw;
+    margin: auto;
     /* background-color: rgba(76, 0, 130, 0.24); */
     /* padding: 1em 3em 0em 3em; */
 }
@@ -45,9 +46,11 @@ header {
     justify-content: center;
     position: relative;
     z-index: 10;
+    width: 100vw;
 }
 .inputCiudad input {
-    width: 75%;
+    box-sizing: border-box;
+    width: 75vw;
     padding: 5px;
     position: relative;
 }
@@ -55,8 +58,8 @@ header {
 .resultadoCiudades{
     position: absolute;
     top: 75%;
-    width: 73.8%;
-    background-color: linen;
+    width: 75vw;
+    background-color: rgb(229, 239, 253);
     transform-origin: 0 0;
 }
 
@@ -71,7 +74,7 @@ li {
 }
 
 li:hover {
-    background-color: rgb(248, 204, 159);
+    background-color: rgb(164, 186, 216);
 }
 
 .li-ciudad-locationIcon {
@@ -122,7 +125,7 @@ li:hover {
 }
 .today-weather {
     display: grid;
-    height: 18em;
+    height: 20em;
     /* background-color: cornsilk; */
     padding: 1em 3em 0em 3em;
     z-index: 0;
@@ -201,12 +204,15 @@ li:hover {
 }
 
 .container-today {
-    display: grid;
-    grid-template-columns: 1fr minmax(165px, 2fr) minmax(200px, 3fr) minmax(225px, 4fr) 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
     align-items: center;
     margin: 1em 0;
     width: 100%;
+}
+
+.container-today-tiempoTemperatura {
+    display: flex;
+    flex-basis: 35em;
 }
 
 .todayWeatherIcon {
@@ -260,6 +266,8 @@ li:hover {
     width: fit-content;
 }
 
+
+
 .paraguas, .luna {
     margin: auto 0.5em auto 0;
     height:  2em;
@@ -295,6 +303,7 @@ li:hover {
     display: flex;
     align-items: center;
     margin-left: auto;
+    flex-basis: 27em;
 }
 
 .durante-container-mayorParte {
@@ -330,6 +339,10 @@ li:hover {
     /* background-color: white; */
 }
 
+.salidaPuesta span {
+    font-weight: 600;
+}
+
 .salidaPuesta-sol, .salidaPuesta-luna {
     display: flex;
     justify-content: space-around;
@@ -343,9 +356,21 @@ li:hover {
 .salidaPuesta-sol{
     padding: 0.5em 0;
 }
+
 .salidaPuesta-luna p {
     padding-bottom: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.salidaPuesta-sol p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 
 .graficas {
     position: relative;
@@ -388,16 +413,17 @@ li:hover {
 .week-weather div.selected::before {
     content: '';
     background-color: transparent;
-    top: 72%;
+    top: 73%;
     left: 50%;
     position: absolute;
-    height: 25px;
-    width: 25px;
+    height: 22px;
+    width: 22px;
     border-style: solid;
     border-width: 25px;
     border-color: transparent purple purple transparent;
     transform: rotate(45deg);
     transform-origin: 0 0;
+    z-index: 0;
 }
 
 .week-weather div:not(.selected):not(:nth-child(6)):not(:nth-child(7)):not(.isTouch):hover {
@@ -595,6 +621,262 @@ li:hover {
 
 .detalleHora i {
     margin: auto 0;
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        height: 768px;
+        width: 100vw;
+        min-width: 0;
+    }
+    .selection{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        width: 100vw;
+        padding: 1em;
+        /* background-color: rgba(76, 0, 130, 0.24); */
+        /* padding: 1em 3em 0em 3em; */
+    }
+    .selection select {
+        font-size: 0.5rem;
+        width: 40vw;
+        margin: 0.5em 1em;
+        /* font-size: 0.4rem; */
+    }
+    .inputCiudad {
+        padding: 0em;
+    }
+
+    .inputCiudad input {
+        width: 94vw;
+        padding: 5px;
+        position: relative;
+    }
+
+    .resultadoCiudades{
+        box-sizing: border-box;
+        position: absolute;
+        top: 100%;
+        width: 94vw;
+        transform-origin: 0 0;
+    }
+
+    .li-ciudad {
+        display: flex;
+        flex-direction: column;
+        width: 75vw;
+    }
+    .today-weather {
+        display: flex;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0;
+        width: 99vw;
+        box-sizing: border-box;
+        padding: 1em 1em;
+    }
+    .today-weather-city {
+        font-size: 0rem;
+    }
+    .today-weather-city span{
+        display: block;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    .container-today {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 1em 0;
+        width: 100vw;
+    }
+
+    .today-weahter-time{
+        flex-direction: column;
+        margin-top: 0.3em;
+        width: 100vw;
+    }
+
+    .today-weahter-time p {
+        text-align: center;
+        font-size: .8rem;
+        font-weight: 600;
+    }
+    .today-weahter-time span{
+        margin: 0.5em;
+    }
+    .socialIcons {
+        left: -7em;
+    }
+    .container-today {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 100vw;
+    }
+
+    .today-weather-container-temperatura {
+        line-height: 2em;
+        margin: 0 0 2em 0;
+        padding: 0 1em;
+        flex-wrap: nowrap;
+    }
+    .container-today-tiempoTemperatura{
+        align-items: center;
+        flex-basis: 0;
+    }
+    .today-weather-temperatura {
+        text-align: right;
+        font-size: 6rem;
+        line-height: 3rem;
+    }
+    .today-weather-sensacionTermica{
+        text-align: right;
+        margin-left: auto;
+        line-height: 1em;
+        margin-top: auto;
+    }
+    .today-weather-container-precipitaciones{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .today-weather-container-precipitaciones-luna{
+        flex-basis: 38%;
+    }
+    .today-weather-container-precipitaciones-luna .cantidad{
+        width: 9em;
+    }
+    .durante-container {
+        display: flex;
+        align-items: center;
+        margin-left: 0;
+        flex-basis: auto;
+        min-width: 15em;
+    }
+    .durante-container-mayorParte{
+        flex-direction: column;
+        flex-basis: none;
+    }
+
+    .salidaPuesta {
+        font-size: 0.7rem;
+        text-align: center;
+        width: 100vw;
+        margin: 1em 0;
+    }
+
+    .graficas {
+        width: 98vw;
+    }
+    .week-weather {
+        display: flex;
+        overflow-y: scroll;
+        flex-shrink: 0;
+        flex-grow: 1;
+        height: auto;
+    }
+
+    .week-weather div {
+        min-width: 9em;
+        margin-bottom: 3em;
+    }
+
+    .week-daySelected-hours{
+        padding-top: 1em;
+    }
+    .week-daySelected-hours-title {
+        font-size: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 1.3em;
+    }
+    .week-daySelected-hours-hour {
+        display: flex;
+        justify-content: space-around;
+        overflow-y: scroll;
+        height: auto;
+        font-size: .9rem;
+    }
+
+    .week-daySelected-hours-hour-time {
+        margin-left: 0.5em;
+        margin-right: 0em;
+        flex-shrink: 0;
+        width: 7em;
+        margin-left: 1em;
+
+    }
+
+    .week-daySelected-hours-temp{
+        flex-basis: 1em;
+        width: 3em;
+        margin-right: 1em;
+        margin-left: 0;
+    }
+    .week-daySelected-hours-temp p {
+        font-size: 2rem;
+        width: 1.6em;
+        text-align: right;
+    }
+
+    .week-daySelected-hours-desc {
+        flex-shrink: 0;
+        width: 10em;
+    }
+    .week-daySelected-hours-vientoUV{
+        display: none;
+        margin-left: 0;
+        width: 10em;
+    }
+    .week-daySelected-hours-vientoUV .icon-sun{
+        font-size: 1.5rem;
+    }
+    .week-daySelected-hours-vientoUV-desc{
+        flex-shrink: 0;
+    }
+
+    .week-daySelected-hours-title-spanTitle {
+        display: none;
+    }
+    .week-daySelected-hours-more{
+        margin-right: 0.5em;
+    }
+    .week-daySelected-hours-more label{
+        font-size: 1rem;
+    }
+
+    .detalleHora {
+        flex-direction: column;
+    }
+    .detalleHora-selected {
+        height: 35em;
+    }
+
+    .detalleHora-col1, .detalleHora-col2 {
+        margin: 0;
+        justify-content: space-around;
+    }
+
+    .detalleHora-col1-nombre, .detalleHora-col2-nombre {
+        font-size: 0.9rem;
+        width: 10em;
+        margin-left: 1em;
+    }
+
+    .detalleHora-col1-datos, .detalleHora-col2-datos {
+        font-size: 0.9rem;
+        width: 15em;
+    }
+
+
 }
 
 

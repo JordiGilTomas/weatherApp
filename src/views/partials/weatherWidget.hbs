@@ -25,24 +25,26 @@
 
         {{!-- <img src="icons/tiempo/{{indexIconoHoraActual}}.svg" alt="" class="todayWeather"> --}}
         <div class="container-today">
-            <img src="icons/tiempo/{{weatherToday.indexIconoHoraActual}}.svg" alt="" class="todayWeatherIcon">
-            <div class="today-weather-container-temperatura">
-                <p class="today-weather-temperatura block">{{weatherToday.temperaturaActual}}<sup class="supBig">o</sup>
-                </p>
-                <p class="today-weather-sensacionTermica">Sensación de <span
-                        class="bold700">{{weatherToday.sensacionTermica}}</span><sup
-                        class="supSmall bold">o</sup></span></p>
+            <div class="container-today-tiempoTemperatura">
+                <img src="icons/tiempo/{{weatherToday.indexIconoHoraActual}}.svg" alt="" class="todayWeatherIcon">
+                <div class="today-weather-container-temperatura">
+                    <p class="today-weather-temperatura block">{{weatherToday.temperaturaActual}}<sup
+                            class="supBig">o</sup>
+                    </p>
+                    <p class="today-weather-sensacionTermica">Sensación de
+                        <span class="bold700">{{weatherToday.sensacionTermica}}</span>
+                        <sup class="supSmall bold">o</sup></span></p>
+                </div>
             </div>
-
             <div class="today-weather-container-precipitaciones">
-                <div class="flexWrap bottom05">
+                <div class="today-weather-container-precipitaciones-lluvia flexWrap bottom05">
                     <img class="paraguas" src="icons/lluvia/paraguas.png" alt="">
                     <div class="porcentaje-container">
                         <p class="porcentaje block">Cantidad</p>
                         <p class="cantidad block">{{weatherToday.rainCantidad}} mm</p>
                     </div>
                 </div>
-                <div class="flexWrap">
+                <div class="today-weather-container-precipitaciones-luna flexWrap">
                     <img class="luna" src="icons/luna/{{weatherToday.iconoLuna}}.png" alt="">
                     <div class="porcentaje-container">
                         <p class="porcentaje block">{{weatherToday.tipoLuna}}</p>
@@ -57,21 +59,21 @@
                     <p class="duranteblock ">{{weatherToday.estadoMayorParteDelDia}}</p>
                 </div>
             </div>
-            <div class="next">
+            {{!-- <div class="next">
                 <button class="btnNext"><i class="icon-arrow-right"></i></button>
-            </div>
+            </div> --}}
         </div>
         <div class="salidaPuesta">
             <div class="salidaPuesta-sol">
-                <p>Salida Sol: {{weatherToday.solSalida}}</p>
-                <p>Mediodía: {{weatherToday.solMediodia}}</p>
-                <p>Puesta Sol: {{weatherToday.solPuesta}}</p>
-                <p>Duración Día: {{weatherToday.duracionDia}}</p>
+                <p>Salida Sol<span>{{weatherToday.solSalida}}</span> </p>
+                <p>Mediodía<span>{{weatherToday.solMediodia}}</span></p>
+                <p>Puesta Sol<span>{{weatherToday.solPuesta}}</span></p>
+                <p>Duración Día<span>{{weatherToday.duracionDia}}</span></p>
             </div>
             <div class="salidaPuesta-luna">
-                <p>Salida Luna: {{weatherToday.lunaSalida}}</p>
-                <p>Puesta Luna: {{weatherToday.lunaPuesta}}</p>
-                <p>Duración Noche: {{weatherToday.duracionNoche}}</p>
+                <p>Salida Luna<span>{{weatherToday.lunaSalida}}</span></p>
+                <p>Puesta Luna<span>{{weatherToday.lunaPuesta}}</span></p>
+                <p>Duración Noche<span>{{weatherToday.duracionNoche}}</span></p>
             </div>
         </div>
         <i class="copy">*Datos obtenidos de tiempo.com</i>
