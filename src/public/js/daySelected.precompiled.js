@@ -84,12 +84,12 @@ templates['daySelected.hbs'] = template({"1":function(container,depth0,helpers,p
         return undefined
     };
 
-  return "<h2 class=\"week-daySelected-hours-title\"><span class=\"week-daySelected-hours-title-spanTitle\">El tiempo en </span><span>"
+  return "<h2 class=\"week-daySelected-hours-title\"><span class=\"week-daySelected-hours-title-spanTitle\">El tiempo en </span><span class=\"week-daySelected-hours-title-spanCity\">"
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0,"hour") : depth0)) != null ? lookupProperty(stack1,"0") : stack1)) != null ? lookupProperty(stack1,"city") : stack1), depth0))
     + "</span> <span>"
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0,"hour") : depth0)) != null ? lookupProperty(stack1,"0") : stack1)) != null ? lookupProperty(stack1,"nombreDia") : stack1), depth0))
     + " "
-    + alias2(((helper = (helper = lookupProperty(helpers,"fecha") || (depth0 != null ? lookupProperty(depth0,"fecha") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias3,{"name":"fecha","hash":{},"data":data,"loc":{"start":{"line":1,"column":170},"end":{"line":1,"column":179}}}) : helper)))
+    + alias2(((helper = (helper = lookupProperty(helpers,"fecha") || (depth0 != null ? lookupProperty(depth0,"fecha") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias3,{"name":"fecha","hash":{},"data":data,"loc":{"start":{"line":1,"column":216},"end":{"line":1,"column":225}}}) : helper)))
     + "</span></h2>\r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(alias3,(depth0 != null ? lookupProperty(depth0,"hour") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":2,"column":0},"end":{"line":125,"column":9}}})) != null ? stack1 : "");
 },"useData":true});
