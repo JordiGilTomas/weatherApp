@@ -350,7 +350,7 @@ const getPronosticos = async (e) => {
     const offset = Number(cincoDiasUnaHora[0].local_info.offset);
     const { horaLocal, minutos } = await getLocalTime(offset, pais);
     const estadoActual = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].symbol.desc2;
-    const indexIconoHoraActual = cincoDiasUnaHora[0].symbol.value2;
+    const indexIconoHoraActual = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].symbol.value2;
     const temperaturaActual = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].temp.value;
     const sensacionTermica = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].windchill.value;
     const rainCantidad = cincoDiasUnaHora[0].hour[Number(horaLocal) - 1].rain.value;
@@ -529,6 +529,9 @@ const muestraCiudades = async (e) => {
             getPronosticos(idCiudad);
             document.getElementById('resultadoCiudades').innerHTML = '';
             ciudadInput.value = '';
+                window.scroll({
+                    top: 115,
+                });
         });
     } else if (document.querySelector('#resultadoCiudades')) {
         document.querySelector('#resultadoCiudades').innerHTML = '';

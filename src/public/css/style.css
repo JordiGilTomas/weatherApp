@@ -10,7 +10,7 @@
     margin-left: auto;
     font-size: 0.6rem;
 }
-body {
+body{
     height: 100vh;
     /* min-width: 815px; */
     margin: auto;
@@ -712,6 +712,255 @@ li:hover {
     .socialIcons {
         left: -7em;
     }
+
+    .today-weather-container-temperatura {
+        line-height: 2em;
+        margin: 0 0 2em 0;
+        padding: 0 1em;
+        flex-wrap: nowrap;
+    }
+    .container-today-tiempoTemperatura{
+        display: flex;
+        /* flex-direction: column-reverse; */
+        align-items: center;
+        justify-content: center;
+        margin: 1.2em 0 2em 0;
+    }
+    .today-weather-temperatura {
+        text-align: right;
+        font-size: 6rem;
+        line-height: 3rem;
+    }
+    .today-weather-sensacionTermica{
+        text-align: right;
+        margin-left: auto;
+        line-height: 1em;
+        margin-top: auto;
+    }
+    .today-weather-container-precipitaciones{
+        display: block;
+        margin: 0;
+    }
+    .today-weather-container-precipitaciones-luna{
+        flex-basis: 50%;
+    }
+    .today-weather-container-precipitaciones-luna .cantidad{
+        width: 9em;
+    }
+    .durante-container {
+        display: flex;
+        align-items: center;
+        margin-left: 0;
+        flex-basis: auto;
+        min-width: 15em;
+    }
+    .durante-container-mayorParte{
+        flex-direction: column;
+        flex-basis: none;
+    }
+
+    .salidaPuesta {
+        font-size: 0.7rem;
+        text-align: center;
+        width: 100vw;
+        margin: 1.7em 0;
+    }
+
+    .graficas {
+        width: 96vw;
+        margin: auto;
+    }
+    .week-weather {
+        display: flex;
+        overflow-y: scroll;
+        flex-shrink: 0;
+        flex-grow: 1;
+        height: auto;
+    }
+
+    .week-weather div {
+        min-width: 9em;
+        margin-bottom: 3em;
+    }
+
+    .week-daySelected-hours{
+        padding-top: 1em;
+    }
+    .week-daySelected-hours-title {
+        font-size: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 1.3em;
+    }
+    .week-daySelected-hours-hour {
+        display: flex;
+        justify-content: space-around;
+        overflow-y: scroll;
+        height: auto;
+        font-size: .9rem;
+    }
+
+    .week-daySelected-hours-hour-time {
+        margin-left: 0.5em;
+        margin-right: 0em;
+        flex-shrink: 0;
+        width: 7em;
+        margin-left: 1em;
+    }
+
+    .week-daySelected-hours-temp{
+        flex-basis: 1em;
+        width: 3em;
+        margin-right: 1em;
+        margin-left: 0;
+    }
+    .week-daySelected-hours-temp p {
+        font-size: 2rem;
+        width: 1.6em;
+        text-align: right;
+    }
+
+    .week-daySelected-hours-desc {
+        flex-shrink: 0;
+        width: 10em;
+    }
+
+    .week-daySelected-hours-vientoUV .icon-sun{
+        font-size: 1.5rem;
+    }
+    .week-daySelected-hours-vientoUV-desc{
+        flex-shrink: 0;
+        width: 6em;
+    }
+
+    .week-daySelected-hours-title-spanTitle {
+        display: none;
+    }
+    .week-daySelected-hours-more{
+        margin-right: 0.5em;
+        margin-left: 1em;
+    }
+    .week-daySelected-hours-more label{
+        font-size: 1.5rem;
+    }
+
+    .detalleHora {
+
+    }
+    .detalleHora-selected {
+        height: 18em;
+    }
+
+    .detalleHora-col1, .detalleHora-col2 {
+        margin: 0;
+        justify-content: space-around;
+    }
+
+    .detalleHora-col1-nombre, .detalleHora-col2-nombre {
+        font-size: 0.8rem;
+        width: auto;
+        margin-left: 0em;
+    }
+
+    .detalleHora-col1-datos, .detalleHora-col2-datos {
+        font-size: 0.8rem;
+        width: auto;
+    }
+
+
+}
+
+
+@media only screen and (max-width: 638px) {
+    body {
+        height: 150vh;
+        min-width: 100vw;
+        min-width: 0;
+    }
+    .selection{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        width: 100vw;
+        padding: 1em;
+        /* background-color: rgba(76, 0, 130, 0.24); */
+        /* padding: 1em 3em 0em 3em; */
+    }
+    .selection select {
+        font-size: 0.5rem;
+        width: 40vw;
+        margin: 0.5em 1em;
+        /* font-size: 0.4rem; */
+    }
+    .inputCiudad {
+        padding: 0em;
+    }
+
+    .inputCiudad input {
+        width: 94vw;
+        padding: 5px;
+        position: relative;
+    }
+
+    .resultadoCiudades{
+        box-sizing: border-box;
+        position: absolute;
+        top: 100%;
+        width: 94vw;
+        transform-origin: 0 0;
+    }
+
+    .li-ciudad {
+        display: flex;
+        flex-direction: column;
+        width: 75vw;
+    }
+    .today-weather {
+        display: flex;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0;
+        width: 99vw;
+        box-sizing: border-box;
+        padding: 1em 1em;
+    }
+    .today-weather-city {
+        font-size: 0rem;
+    }
+    .today-weather-city span{
+        display: block;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    .container-today {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 1em 0;
+        width: 100vw;
+    }
+
+    .today-weahter-time{
+        flex-direction: column;
+        margin-top: 0.3em;
+        width: 100vw;
+    }
+
+    .today-weahter-time p {
+        text-align: center;
+        font-size: .8rem;
+        font-weight: 600;
+    }
+    .today-weahter-time span{
+        margin: 0.5em;
+    }
+    .socialIcons {
+        left: -7em;
+    }
     .container-today {
         display: flex;
 
@@ -728,8 +977,11 @@ li:hover {
         flex-wrap: nowrap;
     }
     .container-today-tiempoTemperatura{
+        display: flex;
+        flex-direction: column-reverse;
         align-items: center;
         flex-basis: 0;
+        margin: 1.2em 0 2em 0;
     }
     .today-weather-temperatura {
         text-align: right;
@@ -769,12 +1021,9 @@ li:hover {
         font-size: 0.7rem;
         text-align: center;
         width: 100vw;
-        margin: 1em 0;
+        margin: 1.7em 0;
     }
 
-    .graficas {
-        width: 98vw;
-    }
     .week-weather {
         display: flex;
         overflow-y: scroll;
@@ -850,14 +1099,14 @@ li:hover {
         margin-right: 0.5em;
     }
     .week-daySelected-hours-more label{
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .detalleHora {
         flex-direction: column;
     }
     .detalleHora-selected {
-        height: 35em;
+        height: 36em;
     }
 
     .detalleHora-col1, .detalleHora-col2 {
