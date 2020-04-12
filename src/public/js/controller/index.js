@@ -78,9 +78,7 @@ const showDaySelected = (weather, dia) => {
         ? hoursDaySelected.filter((hora) => Number(hora.time.split(':')[0]) >= Number(horaLocal))
         : hoursDaySelected;
 
-    // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['daySelected.hbs'];
-    daySelected.innerHTML = template({ hour: horasRestantes });
+    daySelected.innerHTML = UI.createDaySelectedWidget(horasRestantes);
     daySelected.addEventListener('click', mostrarDetalleHora);
 
     UI.createGrafica(hoursDaySelected);
@@ -149,10 +147,7 @@ const muestraCiudades = async (e) => {
     const cityToMatch = e.target.value;
     if (cityToMatch.length > 2) {
         const ciudadesEncontradas = await City.getMatchedCities(cityToMatch);
-
-        // eslint-disable-next-line no-undef
-        const template = Handlebars.templates['ciudadesSelect.hbs'];
-        document.querySelector('#resultadoCiudades').innerHTML = template({ ciudadesEncontradas });
+        document.querySelector('#resultadoCiudades').innerHTML = UI.createCiudadesSelectWidget(ciudadesEncontradas);
         document.getElementById('ciudadUl').addEventListener('click', (item) => {
             const idCiudad = {
                 target: { value: 0 },

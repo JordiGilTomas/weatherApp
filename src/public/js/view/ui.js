@@ -1,3 +1,10 @@
+import './plugins/Chart.min.js';
+// Modified line 36 on Handlebars.runtime to make it to work with import
+// added (|| window) to 'this' because in strict mode 'this' can not be used to access 'window'.
+import '../view/plugins/handlebars.runtime-v4.7.6.js';
+import '../view/precompiled/ciudadesSelect.precompiled.js';
+import '../view/precompiled/daySelected.precompiled.js';
+import '../view/precompiled/weatherWidget.precompiled.js';
 export default class Widgets {
 
     static createTodayWidget = (weatherToday, weatherWeek, isTouch) => {
@@ -18,6 +25,16 @@ export default class Widgets {
         share.addEventListener('click', () => {
             share.firstElementChild.classList.toggle('show');
         });
+    }
+
+    static createDaySelectedWidget = (horasRestantes) => {
+        const template = Handlebars.templates['daySelected.hbs'];
+        return  template({ hour: horasRestantes });
+    };
+
+    static createCiudadesSelectWidget = (ciudadesEncontradas) => {
+        const template = Handlebars.templates['ciudadesSelect.hbs'];
+        return template({ ciudadesEncontradas });
     }
 
     static createGrafica = (hoursDaySelected) => {
