@@ -3,7 +3,10 @@
 <div class="week-daySelected-hours-hour">
     <div class="week-daySelected-hours-hour-time">
         <span>{{time}}</span>
-        <img src="icons/tiempo/{{#if noche}}noche/{{/if}}{{iconoTime}}.svg" alt="" class="todayWeatherIcon">
+        <span class="week-daySelected-hours-hour-time-iconoYlluvia">
+            <img src="icons/tiempo/{{#if noche}}noche/{{/if}}{{iconoTime}}.svg" alt="" class="todayWeatherIcon">
+            {{#if lluvia}}<span class="week-daySelected-hours-hour-lluvia">{{lluvia}}mm</span>{{/if}}
+        </span>
     </div>
     <div class="week-daySelected-hours-temp">
         <p>{{temp}}°</p>

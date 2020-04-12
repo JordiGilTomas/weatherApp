@@ -1,5 +1,6 @@
 <ul id="ciudadUl" class="ciudadUl">
 {{#each ciudadesEncontradas}}
+    {{#if id}}
     <li value="{{id}}">
         <span class="li-ciudad-locationIcon">
             <i class="icon-placepin"></i>
@@ -19,5 +20,6 @@
             <img src="https://www.tiempo.com/css/2018/icons/banderas18/{{pais}}.svg" alt="">
         </span>
         </li>
+        {{/if}}
 {{/each}}
 </ul>

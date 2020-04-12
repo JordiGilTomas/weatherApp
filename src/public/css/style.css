@@ -499,6 +499,20 @@ li:hover {
 .week-daySelected-hours-hour-time {
     margin-left: 3em;
     margin-right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.week-daySelected-hours-hour-time-iconoYlluvia {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.week-daySelected-hours-hour-lluvia{
+    font-size: .6rem;
 }
 
 .week-daySelected-hours .icon-sun {

@@ -180,6 +180,7 @@ export default class Weather{
                 time: `0${hour}:00`.slice(-5),
                 iconoTime: eachHora.symbol.value2,
                 temp: eachHora.temp.value,
+                lluvia: (eachHora.rain.value === '0') ? null : eachHora.rain.value,
                 descTemp: eachHora.symbol.desc2,
                 sensacionTermica: eachHora.windchill.value,
                 iconoViento: eachHora.wind.symbolB,
@@ -194,7 +195,7 @@ export default class Weather{
                 humedad: eachHora.humidity.value,
                 nubosidad: eachHora.clouds.value,
                 presion: eachHora.pressure.value,
-                alturaNubes: this.getAlturaNubes(eachHora.temp.value),
+                alturaNubes: this.getAlturaNubes(eachHora.temp.value, eachHora.humidity.value),
                 puntoRocio: this.getPuntoRocio(eachHora.temp.value, eachHora.humidity.value),
                 niebla: this.isFoggy(eachHora.temp.value),
                 cuotaNieve: eachHora.snowline.value,
@@ -264,15 +265,15 @@ export default class Weather{
     };
 
 
-    getPuntoRocio = (temp, humi) => {
-        const rocio = (temp - (14.55 + 0.114 * temp) * (1 - (0.01 * humi)) - (((2.5 + 0.007 * temp)
-            * (1 - (0.01 * humi))) ** 3) - (15.9 + 0.117 * temp) * ((1 - (0.01 * humi)) ** 14));
+    getPuntoRocio = (temp, humidity) => {
+        const rocio = (temp - (14.55 + 0.114 * temp) * (1 - (0.01 * humidity)) - (((2.5 + 0.007 * temp)
+            * (1 - (0.01 * humidity))) ** 3) - (15.9 + 0.117 * temp) * ((1 - (0.01 * humidity)) ** 14));
         return Math.round(rocio);
     };
 
-    getAlturaNubes = (temp) => {
-        const rocio = this.getPuntoRocio();
-        Math.max(0, 125 * (temp - rocio));
+    getAlturaNubes = (temp, humidity) => {
+        const rocio = this.getPuntoRocio(temp, humidity);
+        return Math.max(0, 125 * (temp - rocio));
     }
 
     isFoggy = (temp) => {
