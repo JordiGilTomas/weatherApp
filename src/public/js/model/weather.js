@@ -60,16 +60,13 @@ export default class Weather{
 
     encuentraEstadoMasRepetido = (pronosticoPorHoras) => {
         const estados = [];
-
         pronosticoPorHoras.forEach((estadoHora) => {
             const estadoRepetido = estados.find((estado) => estado.desc2 === estadoHora.symbol.desc2);
             if (estadoRepetido) estadoRepetido.cantidad += 1;
-            else estados.push({ ...estadoHora, cantidad: 1 });
+            else estados.push({desc2: estadoHora.symbol.desc2, cantidad: 1 });
         });
-
         const maxCantidad = Math.max(...estados.map((estado) => estado.cantidad));
-
-        return estados.find((estado) => estado.cantidad === maxCantidad).symbol.desc2;
+        return estados.find((estado) => estado.cantidad === maxCantidad).desc2;
     };
 
     getDuracionDia = () => {
