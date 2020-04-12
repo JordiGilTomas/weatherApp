@@ -72,7 +72,7 @@ const showDaySelected = (weather, dia) => {
     const daySelected = document.getElementById('week-daySelected-hours');
     const city = weather.getCity();
     const horaLocal = weather.getHoraLocal();
-    const hoursDaySelected = weather.getHorasRestantes(dia, city, horaLocal, isTouch);
+    const hoursDaySelected = weather.getHorasRestantes(dia, city, isTouch);
 
     const horasRestantes = (Number(dia) === 0)
         ? hoursDaySelected.filter((hora) => Number(hora.time.split(':')[0]) >= Number(horaLocal))
