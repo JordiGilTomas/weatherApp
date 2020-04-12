@@ -39,4 +39,4 @@ export const getPronosticoCincoDiasTresHoras = (localidad) => getDataFromWeather
 
 export const getPronosticoCincoDiasUnaHora = (localidad) => getDataFromWeatherAPI(`&localidad=${localidad}`, '&v=2&h=1');
 
-export const getCiudades = async (fragmento) => fetch(new URL(`https://www.tiempo.com/peticionBuscador.php?lang=es&texto=${fragmento}&affiliate_id=pui9u641rfkj`));
+export const getCiudades = async (fragmento) => fetch(new URL(`https://www.tiempo.com/peticionBuscador.php?lang=es&texto=${fragmento}&affiliate_id=${process.env.KEY}`));
