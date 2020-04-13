@@ -1,6 +1,6 @@
 import Weather from '../model/weather.js';
-import CityClass from '../model/city.js';
-import UIClass from '../view/ui.js';
+import Cities from '../model/city.js';
+import UI from '../view/ui.js';
 
 const continenteSelect = document.getElementById('continentes');
 const paisSelect = document.getElementById('paises');
@@ -9,8 +9,7 @@ const localidadSelect = document.getElementById('localidades');
 const ciudadInput = document.getElementById('ciudadInput');
 const url = window.location.href;
 const isTouch = ('ontouchstart' in window) ? 'isTouch' : 'isNotTouch';
-const City = new CityClass();
-const UI = new UIClass();
+
 
 const getPaises = async (e) => {
     if (continenteSelect.querySelector('#optionTitle')) continenteSelect.removeChild(continenteSelect.options[0]);
@@ -148,7 +147,7 @@ const renderPronosticos = async (e) => {
 const muestraCiudades = async (e) => {
     const cityToMatch = e.target.value;
     if (cityToMatch.length > 2) {
-        const ciudadesEncontradas = await City.getMatchedCities(cityToMatch);
+        const ciudadesEncontradas = await Cities.getMatchedCities(cityToMatch);
         document.querySelector('#resultadoCiudades').innerHTML = UI.createCiudadesSelectWidget(ciudadesEncontradas);
         document.getElementById('ciudadUl').addEventListener('click', (item) => {
             const idCiudad = {

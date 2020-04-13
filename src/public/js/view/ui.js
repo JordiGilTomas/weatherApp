@@ -1,20 +1,25 @@
-import './plugins/Chart.min.js';
+import './plugins/Chart.min';
 // Modified line 36 on Handlebars.runtime to make it to work with import
 // added (|| window) to 'this' because in strict mode 'this' can not be used to access 'window'.
-import '../view/plugins/handlebars.runtime-v4.7.6.js';
-import '../view/precompiled/ciudadesSelect.precompiled.js';
-import '../view/precompiled/daySelected.precompiled.js';
-import '../view/precompiled/weatherWidget.precompiled.js';
+// import '../view/plugins/handlebars.runtime-v4.7.6.js';
+// import weatherTemplate from '../view/precompiled/ciudadesSelect.precompiled.js';
+// import daySelectedTemplate from '../view/precompiled/daySelected.precompiled.js';
+// import ciudadSelectTemplate from '../view/precompiled/weatherWidget.precompiled.js';
+
+// Con Webpack no hace falta usar ya los precompilados ni importar handlebars
+import ciudadesSelectTemplate from './precompiled/ciudadesSelect.hbs';
+import daySelectedTemplate from './precompiled/daySelected.hbs';
+import weatherTemplate from './precompiled/weatherWidget.hbs';
 export default class Widgets {
 
-    createTodayWidget = (weatherToday, weatherWeek, isTouch) => {
-        const template = Handlebars.templates['weatherWidget.hbs'];
+    static createTodayWidget (weatherToday, weatherWeek, isTouch) {
+        // const template = Handlebars.templates['weatherWidget.hbs'];
         if (document.querySelector('#widget')) {
-            document.querySelector('#widget').innerHTML = template( weatherToday, weatherWeek, isTouch );
+            document.querySelector('#widget').innerHTML = weatherTemplate( weatherToday, weatherWeek, isTouch );
         } else {
             const widget = document.createElement('div');
             widget.id = 'widget';
-            widget.innerHTML = template(weatherToday, weatherWeek, isTouch);
+            widget.innerHTML = weatherTemplate( weatherToday, weatherWeek, isTouch );
             document.body.appendChild(widget);
         }
         const heart = document.getElementById('heart');
@@ -27,17 +32,11 @@ export default class Widgets {
         });
     }
 
-    createDaySelectedWidget = (horasRestantes) => {
-        const template = Handlebars.templates['daySelected.hbs'];
-        return  template({ hour: horasRestantes });
-    };
+    static createDaySelectedWidget = (horasRestantes) =>  daySelectedTemplate({ hour: horasRestantes });
 
-    createCiudadesSelectWidget = (ciudadesEncontradas) => {
-        const template = Handlebars.templates['ciudadesSelect.hbs'];
-        return template({ ciudadesEncontradas });
-    }
+    static createCiudadesSelectWidget = (ciudadesEncontradas) => ciudadesSelectTemplate({ ciudadesEncontradas });
 
-    createGrafica = (hoursDaySelected) => {
+    static createGrafica = (hoursDaySelected) => {
         const xLabels = hoursDaySelected.map((hour) => hour.time);
         const yTemps = hoursDaySelected.map((hour) => hour.temp);
         const yTermica = hoursDaySelected.map((hour) => hour.sensacionTermica);

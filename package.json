@@ -2,12 +2,13 @@
   "name": "weatherapp",
   "version": "1.0.0",
   "description": "A Weather APP",
-  "main": "index.js",
+  "private": true,
   "type": "module",
   "scripts": {
     "start": "node --experimental-modules src/index.js",
     "ui": "browser-sync start --proxy=localhost:8000 --files='**/*.css, **/*.js' --ignore=node_modules --reload-delay 10 --no-ui --no-notify--reload-delay 10",
-    "dev": "start npm run ui && start nodemon src/index.js"
+    "dev": "start npm run ui && start nodemon src/index.js",
+    "webp": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,12 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "browser-sync": "^2.26.7",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
@@ -40,9 +47,11 @@
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prefer-arrow": "^1.2.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "mkdirp": "^1.0.3"
+    "mkdirp": "^1.0.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
   }
 }

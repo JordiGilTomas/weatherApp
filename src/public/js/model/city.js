@@ -1,6 +1,5 @@
 export default class Cities {
-
-getMatchedCities = async (cityToMatch) => {
+static getMatchedCities = async (cityToMatch)  => {
     const url = window.location.href;
     const ciudades = [...await (await fetch(`${url}getCiudades/${cityToMatch}`)).json()];
     const ciudadesEncontradas = ciudades[0].localidad.map((ciudad) => {

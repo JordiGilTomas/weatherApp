@@ -1,0 +1,111 @@
+<section class="weather">
+    <div class="today-weather">
+        <p class="today-weather-city block">El Tiempo en <span>{{weatherToday.city}}</span></p>
+        <div class="today-weahter-time">
+            <p class="time bold500">{{weatherToday.horaLocal}}:{{weatherToday.minutos}} {{weatherToday.estadoActual}}
+            </p>
+            <span class="icons">
+                <i id="heart" class="icon-heart-unselected"></i>
+                <i id="share" class="icon-share">
+                    <div class="socialIcons">
+                        <i id="facebook" class="icon-social-facebook"></i>
+                        <i id="twitter" class="icon-social-twitter"></i>
+                        <i id="linkedin" class="icon-social-linkedin"></i>
+                        <i id="pinterest" class="icon-social-pinterest"></i>
+                        <i id="mail" class="icon-social-mail"></i>
+                        <i id="tumblr" class="icon-social-tumblr"></i>
+                        <i id="xing" class="icon-social-xing"></i>
+                        <i id="print" class="icon-social-print"></i>
+                    </div>
+                </i>
+
+            </span>
+        </div>
+
+
+        {{!-- <img src="icons/tiempo/{{indexIconoHoraActual}}.svg" alt="" class="todayWeather"> --}}
+        <div class="container-today">
+            <div class="container-today-tiempoTemperatura">
+                <img src="icons/tiempo/{{weatherToday.indexIconoHoraActual}}.svg" alt="" class="todayWeatherIcon">
+                <div class="today-weather-container-temperatura">
+                    <p class="today-weather-temperatura block">{{weatherToday.temperaturaActual}}<sup
+                            class="supBig">o</sup>
+                    </p>
+                    <p class="today-weather-sensacionTermica">Sensación de
+                        <span class="bold700">{{weatherToday.sensacionTermica}}</span>
+                        <sup class="supSmall bold">o</sup></span></p>
+                </div>
+            </div>
+            <div class="today-weather-container-precipitaciones">
+                <div class="today-weather-container-precipitaciones-lluvia flexWrap bottom05">
+                    <img class="paraguas" src="icons/lluvia/paraguas.png" alt="">
+                    <div class="porcentaje-container">
+                        <p class="porcentaje block">Cantidad</p>
+                        <p class="cantidad block">{{weatherToday.rainCantidad}} mm</p>
+                    </div>
+                </div>
+                <div class="today-weather-container-precipitaciones-luna flexWrap">
+                    <img class="luna" src="icons/luna/{{weatherToday.iconoLuna}}.png" alt="">
+                    <div class="porcentaje-container">
+                        <p class="porcentaje block">{{weatherToday.tipoLuna}}</p>
+                        <p class="cantidad block">{{weatherToday.descripcionLuna}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="durante-container">
+                <button class="btnDetalle">i</button>
+                <div class="durante-container-mayorParte">
+                    <p class="durante block bold subrayado">La mayor parte del día</p>
+                    <p class="duranteblock ">{{weatherToday.estadoMayorParteDelDia}}</p>
+                </div>
+            </div>
+            {{!-- <div class="next">
+                <button class="btnNext"><i class="icon-arrow-right"></i></button>
+            </div> --}}
+        </div>
+        <div class="salidaPuesta">
+            <div class="salidaPuesta-sol">
+                <p>Salida Sol<span>{{weatherToday.solSalida}}</span> </p>
+                <p>Mediodía<span>{{weatherToday.solMediodia}}</span></p>
+                <p>Puesta Sol<span>{{weatherToday.solPuesta}}</span></p>
+                <p>Duración Día<span>{{weatherToday.duracionDia}}</span></p>
+            </div>
+            <div class="salidaPuesta-luna">
+                <p>Salida Luna<span>{{weatherToday.lunaSalida}}</span></p>
+                <p>Puesta Luna<span>{{weatherToday.lunaPuesta}}</span></p>
+                <p>Duración Noche<span>{{weatherToday.duracionNoche}}</span></p>
+            </div>
+        </div>
+        <i class="copy">*Datos obtenidos de tiempo.com</i>
+    </div>
+
+    <article id="graficas" class="graficas">
+        <canvas id="grafica"></canvas>
+    </article>
+
+    <aticle id="week-weather" class="week-weather">
+        {{#each weatherWeek}}
+        <div id={{@key}} {{#if selected}} class="selected {{../isTouch}}" {{/if}} class="{{../isTouch}}">
+            <p class="bold700">{{nombreDia}}</p>
+            <p>{{diaAndMes}}</p>
+            <img src="icons/tiempo/{{tiempoIcono}}.svg" alt="" class="weekWeatherIcon">
+            <img class="week-weather-paraguas" src="icons/lluvia/paraguas.png" alt="">
+            <p> {{#if lluvia}}
+                {{lluvia}} mm
+                {{else}} -
+                {{/if}}
+            </p>
+
+            <p class="week-weather-rangoTemperatura bold">{{temperaturaMaxima}}° / {{temperaturaMinima}}°</p>
+            <img src="icons/viento/{{vientoIcono}}.png" alt="" class="weekWindIcon">
+            <p>{{vientoKmh}}-{{vientoRachas}}</p>
+            <p>km/h</p>
+        </div>
+        {{/each}}
+    </aticle>
+
+    <article id="week-daySelected-hours" class="week-daySelected-hours">
+
+    </article>
+
+</section>
