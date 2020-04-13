@@ -72,32 +72,33 @@ export default class Weather{
     getDuracionDia = () => {
         const solSalida = this.getSolSalida();
         const solPuesta = this.getSolPuesta();
+
         if (solPuesta.includes('-') || solPuesta === null ||
-            solSalida.includes('-') || solSalida === null) {
+        solSalida.includes('-') || solSalida === null) {
             return '--:--';
         };
         const duracionDia = new Date();
+        const solhoraSalida = Number(solSalida.split(':')[0]);
+        const solMinutosSalida = Number(solSalida.split(':')[1]);
+        let solHoraPuesta = Number(solPuesta.split(':')[0]);
+        let solMinutosPuesta = Number(solPuesta.split(':')[1]);
 
-        duracionDia.setUTCHours(
-            Number(solPuesta.split(':')[0]) - Number(solSalida.split(':')[0]),
-            Number(solPuesta.split(':')[1] - Number(solSalida.split(':')[1])),
-        );
+        solHoraPuesta = (solHoraPuesta < solhoraSalida) ? solHoraPuesta += 24 : solHoraPuesta;
+        solMinutosPuesta = (solMinutosPuesta < solMinutosSalida) ? solMinutosPuesta += 0 : solMinutosPuesta;
+
+        duracionDia.setUTCHours(solHoraPuesta - solhoraSalida, solMinutosPuesta - solMinutosSalida);
         return `${duracionDia.getUTCHours()}h ${(`0${duracionDia.getMinutes()}`).slice(-2)}m`;
     };
 
     getDuracionNoche = () => {
-        const lunaSalida = this.getLunaSalida();
-        const lunaPuesta = this.getLunaPuesta();
-        if (lunaPuesta.includes('-') || lunaPuesta === null ||
-            lunaSalida.includes('-') || lunaSalida === null) {
-            return '--:--';
-        }
+        const duracionDia = this.getDuracionDia();
+        if (duracionDia === '--:--') return '--:--';
+
+        const duracionDiaHora = Number(duracionDia.split('h')[0]);
+        const duracionDiaMinutos = Number(duracionDia.split('h ')[1].slice(0, -1));
         const duracionNoche = new Date();
 
-        duracionNoche.setUTCHours(
-            Number(lunaSalida.split(':')[0]) - Number(lunaPuesta.split(':')[0]),
-            Number(lunaSalida.split(':')[1] - Number(lunaPuesta.split(':')[1])),
-        );
+        duracionNoche.setUTCHours( ((duracionDiaMinutos > 0) ? 23 : 24) - duracionDiaHora, 60 - duracionDiaMinutos);
         return `${duracionNoche.getUTCHours()}h ${(`0${duracionNoche.getMinutes()}`).slice(-2)}m`;
     };
 
