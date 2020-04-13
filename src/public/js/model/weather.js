@@ -95,10 +95,13 @@ export default class Weather{
         if (duracionDia === '--:--') return '--:--';
 
         const duracionDiaHora = Number(duracionDia.split('h')[0]);
-        const duracionDiaMinutos = Number(duracionDia.split('h ')[1].slice(0, -1));
+        const duracionDiaMinutos = Number(duracionDia.split('m')[0].slice(-2));
         const duracionNoche = new Date();
 
-        duracionNoche.setUTCHours( ((duracionDiaMinutos > 0) ? 23 : 24) - duracionDiaHora, 60 - duracionDiaMinutos);
+        duracionNoche.setUTCHours(
+            ((duracionDiaMinutos > 0) ? 23 : 24) - duracionDiaHora,
+            ((duracionDiaMinutos > 0) ? 60 : 0) - duracionDiaMinutos);
+
         return `${duracionNoche.getUTCHours()}h ${(`0${duracionNoche.getMinutes()}`).slice(-2)}m`;
     };
 
