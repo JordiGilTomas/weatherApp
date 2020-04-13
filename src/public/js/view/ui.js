@@ -7,7 +7,7 @@ import '../view/precompiled/daySelected.precompiled.js';
 import '../view/precompiled/weatherWidget.precompiled.js';
 export default class Widgets {
 
-    createTodayWidget = (weatherToday, weatherWeek, isTouch) => {
+    static createTodayWidget = (weatherToday, weatherWeek, isTouch) => {
         const template = Handlebars.templates['weatherWidget.hbs'];
         if (document.querySelector('#widget')) {
             document.querySelector('#widget').innerHTML = template( weatherToday, weatherWeek, isTouch );
@@ -27,17 +27,17 @@ export default class Widgets {
         });
     }
 
-    createDaySelectedWidget = (horasRestantes) => {
+    static createDaySelectedWidget = (horasRestantes) => {
         const template = Handlebars.templates['daySelected.hbs'];
         return  template({ hour: horasRestantes });
     };
 
-    createCiudadesSelectWidget = (ciudadesEncontradas) => {
+    static createCiudadesSelectWidget = (ciudadesEncontradas) => {
         const template = Handlebars.templates['ciudadesSelect.hbs'];
         return template({ ciudadesEncontradas });
     }
 
-    createGrafica = (hoursDaySelected) => {
+    static createGrafica = (hoursDaySelected) => {
         const xLabels = hoursDaySelected.map((hour) => hour.time);
         const yTemps = hoursDaySelected.map((hour) => hour.temp);
         const yTermica = hoursDaySelected.map((hour) => hour.sensacionTermica);
