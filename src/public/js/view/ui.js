@@ -12,8 +12,13 @@ import daySelectedTemplate from './precompiled/daySelected.hbs';
 import weatherTemplate from './precompiled/weatherWidget.hbs';
 export default class Widgets {
 
+<<<<<<< HEAD
     static createTodayWidget (weatherToday, weatherWeek, isTouch) {
         // const template = Handlebars.templates['weatherWidget.hbs'];
+=======
+    static createTodayWidget = (weatherToday, weatherWeek, isTouch) => {
+        const template = Handlebars.templates['weatherWidget.hbs'];
+>>>>>>> 3b2360dc0ff0ccffd72734c330c164d23feed6d0
         if (document.querySelector('#widget')) {
             document.querySelector('#widget').innerHTML = weatherTemplate( weatherToday, weatherWeek, isTouch );
         } else {

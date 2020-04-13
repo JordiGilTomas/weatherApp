@@ -1,5 +1,9 @@
 import Weather from '../model/weather.js';
+<<<<<<< HEAD
 import Cities from '../model/city.js';
+=======
+import City from '../model/city.js';
+>>>>>>> 3b2360dc0ff0ccffd72734c330c164d23feed6d0
 import UI from '../view/ui.js';
 
 const continenteSelect = document.getElementById('continentes');
