@@ -6,6 +6,8 @@ import './plugins/Chart.min';
 // import daySelectedTemplate from '../view/precompiled/daySelected.precompiled.js';
 // import ciudadSelectTemplate from '../view/precompiled/weatherWidget.precompiled.js';
 
+import "../../css/style.css";
+import "../../css/weatherAppIcons.css";
 // Con Webpack no hace falta usar ya los precompilados ni importar handlebars
 import ciudadesSelectTemplate from './precompiled/ciudadesSelect.hbs';
 import daySelectedTemplate from './precompiled/daySelected.hbs';

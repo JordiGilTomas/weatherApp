@@ -29,19 +29,20 @@ export default class Weather{
 
         horaLocal = `0${horaLocal}`.slice(-2);
         minutos = `0${minutos}`.slice(-2);
+        const indexHora = (Number(horaLocal) === 0) ? 23 : Number(horaLocal) - 1;
 
-        return { horaLocal, minutos };
+        return { horaLocal, minutos, indexHora };
     };
 
     getCity = () => this.cincoDiasTresHoras[0].city.split('[')[0];
     getHoraLocal = () => this.horaLocal;
     getMinutos = () => this.minutos;
     getPais = () => this.cincoDiasTresHoras[0].city.split(';')[1].slice(0, -1);
-    getEstadoActual = () => this.cincoDiasUnaHora[0].hour[Number(this.horaLocal) - 1].symbol.desc2;
-    getIndexIconoHoraActual = () => this.cincoDiasUnaHora[0].hour[Number(this.horaLocal) - 1].symbol.value2;
-    getTemperaturaActual = () => this.cincoDiasUnaHora[0].hour[Number(this.horaLocal) - 1].temp.value;
-    getSensacionTermica = () => this.cincoDiasUnaHora[0].hour[Number(this.horaLocal) - 1].windchill.value;
-    getRainCantidad = () => this.cincoDiasUnaHora[0].hour[Number(this.horaLocal) - 1].rain.value;
+    getEstadoActual = () => this.cincoDiasUnaHora[0].hour[this.indexHora].symbol.desc2;
+    getIndexIconoHoraActual = () => this.cincoDiasUnaHora[0].hour[this.indexHora].symbol.value2;
+    getTemperaturaActual = () => this.cincoDiasUnaHora[0].hour[this.indexHora].temp.value;
+    getSensacionTermica = () => this.cincoDiasUnaHora[0].hour[this.indexHora].windchill.value;
+    getRainCantidad = () => this.cincoDiasUnaHora[0].hour[this.indexHora].rain.value;
     getEstadoMayorParteDelDia = () => this.encuentraEstadoMasRepetido(this.cincoDiasUnaHora[0].hour);
     getIconoLuna = () => this.cincoDiasUnaHora[0].moon.symbol;
     getTipoLuna = () => {
