@@ -29,7 +29,7 @@ export default class Weather{
 
         horaLocal = `0${horaLocal}`.slice(-2);
         minutos = `0${minutos}`.slice(-2);
-        const indexHora = (Number(horaLocal) === 0) ? 23 : Number(horaLocal) - 1;
+        const indexHora = Number(horaLocal);
 
         return { horaLocal, minutos, indexHora };
     };
@@ -58,6 +58,7 @@ export default class Weather{
     getSolPuesta = () => this.cincoDiasTresHoras[0].day[0].sun.out;
     getLunaSalida = () => this.cincoDiasTresHoras[0].day[0].moon.in;
     getLunaPuesta = () => this.cincoDiasTresHoras[0].day[0].moon.out;
+    getIsNoche = () => this.isNoche(this.getHoraLocal(), this.getSolSalida(), this.getSolPuesta())
 
     encuentraEstadoMasRepetido = (pronosticoPorHoras) => {
         const estados = [];
@@ -287,7 +288,7 @@ export default class Weather{
         return 'No';
     };
     isNoche = (hora, primeraLuz, ultimaLuz) => {
-        if (hora < Number(primeraLuz.split(':')[0]) || hora > Number(ultimaLuz.split(':')[0])) return true;
+        if (Number(hora) < Number(primeraLuz.split(':')[0]) || Number(hora) > Number(ultimaLuz.split(':')[0])) return true;
         return false;
     };
 };

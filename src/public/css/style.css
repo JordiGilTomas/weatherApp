@@ -751,11 +751,16 @@ li:hover {
         margin-top: auto;
     }
     .today-weather-container-precipitaciones{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .porcentaje-container {
         display: block;
-        margin: 0;
     }
     .today-weather-container-precipitaciones-luna{
-        flex-basis: 50%;
+        flex-basis: auto;
     }
     .today-weather-container-precipitaciones-luna .cantidad{
         width: 9em;
@@ -1016,7 +1021,7 @@ li:hover {
     .today-weather-container-precipitaciones{
         display: flex;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
     .today-weather-container-precipitaciones-luna{
         flex-basis: 38%;

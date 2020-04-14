@@ -112,6 +112,7 @@ const renderPronosticos = async (e) => {
         lunaSalida: weather.getLunaSalida(),
         lunaPuesta: weather.getLunaPuesta(),
         duracionNoche: weather.getDuracionNoche(),
+        noche: weather.getIsNoche(),
     };
 
     const weatherWeek = weather.getWeatherWeek();

@@ -26,7 +26,7 @@
         {{!-- <img src="icons/tiempo/{{indexIconoHoraActual}}.svg" alt="" class="todayWeather"> --}}
         <div class="container-today">
             <div class="container-today-tiempoTemperatura">
-                <img src="icons/tiempo/{{weatherToday.indexIconoHoraActual}}.svg" alt="" class="todayWeatherIcon">
+                <img src="icons/tiempo/{{#if weatherToday.noche}}noche/{{/if}}{{weatherToday.indexIconoHoraActual}}.svg" alt="" class="todayWeatherIcon">
                 <div class="today-weather-container-temperatura">
                     <p class="today-weather-temperatura block">{{weatherToday.temperaturaActual}}<sup
                             class="supBig">o</sup>
