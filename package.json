@@ -4,6 +4,7 @@
   "description": "A Weather APP",
   "private": true,
   "type": "module",
+  "browserslist": ["> 0.5% or last 2 versions, not dead"],
   "scripts": {
     "start": "node --experimental-modules src/index.js",
     "ui": "browser-sync start --proxy=localhost:8000 --files='**/*.css, **/*.js' --ignore=node_modules --reload-delay 10 --no-ui --no-notify--reload-delay 10",
@@ -37,6 +38,7 @@
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-syntax-import-meta": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -49,6 +51,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "handlebars-loader": "^1.7.1",
     "mkdirp": "^1.0.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",

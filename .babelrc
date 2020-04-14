@@ -2,17 +2,15 @@
     "plugins":
         [
             ["@babel/plugin-proposal-class-properties"]
+            // ["@babel/plugin-transform-runtime"]
             // ["transform-class-properties"]
     ],
     "presets": [
         [
             "@babel/preset-env",
             {
-                "targets": {
-                    "esmodules": false,
-                    "node": "current"
+                // "targets": "> 0.5% or last 2 versions, not dead"
                 }
-            }
         ]
     ]
 }

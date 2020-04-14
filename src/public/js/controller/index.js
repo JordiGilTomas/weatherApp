@@ -1,9 +1,5 @@
 import Weather from '../model/weather.js';
-<<<<<<< HEAD
-import Cities from '../model/city.js';
-=======
 import City from '../model/city.js';
->>>>>>> 3b2360dc0ff0ccffd72734c330c164d23feed6d0
 import UI from '../view/ui.js';
 
 const continenteSelect = document.getElementById('continentes');
@@ -151,7 +147,7 @@ const renderPronosticos = async (e) => {
 const muestraCiudades = async (e) => {
     const cityToMatch = e.target.value;
     if (cityToMatch.length > 2) {
-        const ciudadesEncontradas = await Cities.getMatchedCities(cityToMatch);
+        const ciudadesEncontradas = await City.getMatchedCities(cityToMatch);
         document.querySelector('#resultadoCiudades').innerHTML = UI.createCiudadesSelectWidget(ciudadesEncontradas);
         document.getElementById('ciudadUl').addEventListener('click', (item) => {
             const idCiudad = {

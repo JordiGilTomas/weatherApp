@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     // mode: 'development',
-    entry: './src/public/js/controller/index.js',
+    entry: ['./node_modules/regenerator-runtime/runtime.js', './src/public/js/controller/index.js'],
     target: 'node',
     output: {
         filename: 'main.js',
